@@ -40,7 +40,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('stylus', function () {
-  var cssSrc = './desarrollo/static/stylus/*.styl',
+  var cssSrc = './desarrollo/static/stylus/main-index.styl',
       cssDst = './sitioWeb/app/static/css';
 
   gulp.src(cssSrc)

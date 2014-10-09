@@ -20,19 +20,28 @@ function browserifyShare(){
     bundleShare(b);
   });
   
-  b.add('./static/js/prueba.js');
+  b.add('./desarrollo/static/js/header.js');
   bundleShare(b);
 }
 
 function bundleShare(b) {
   b.bundle()
-    .pipe(source('main.js'))
-    .pipe(gulp.dest('./static/js'));
+    .pipe(source('main-index.js'))
+    .pipe(gulp.dest('./sitioWeb/app/static/js'));
 }
 
 gulp.task('html', function () {
   var htmlSrc = './desarrollo/templates/*.html',
       htmlDst = './sitioWeb/app/templates';
+
+  gulp.src(htmlSrc)
+  .pipe(minifyHTML())
+  .pipe(gulp.dest(htmlDst));
+});
+
+gulp.task('partials', function (){
+  var htmlSrc = './desarrollo/static/partials/*.html',
+      htmlDst = './sitioWeb/app/templates/partials';
 
   gulp.src(htmlSrc)
   .pipe(minifyHTML())
@@ -61,7 +70,8 @@ gulp.task('js', function () {
 });
 
 
-gulp.task('toDjango', ['html', 'stylus'], function (){
+gulp.task('toDjango', ['html', 'stylus', 'partials'], function (){
   gulp.watch("desarrollo/templates/*.html", ['html']);
+  gulp.watch("desarrollo/static/partials/*.html", ['html']);
   gulp.watch("desarrollo/static/stylus/*.styl", ['stylus']);
 });

@@ -72,6 +72,6 @@ gulp.task('js', function () {
 
 gulp.task('toDjango', ['html', 'stylus', 'partials'], function (){
   gulp.watch("desarrollo/templates/*.html", ['html']);
-  gulp.watch("desarrollo/static/partials/*.html", ['html']);
+  gulp.watch("desarrollo/static/partials/*.html", ['partials']);
   gulp.watch("desarrollo/static/stylus/*.styl", ['stylus']);
 });

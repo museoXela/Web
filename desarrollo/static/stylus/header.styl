@@ -39,6 +39,7 @@
                 a
                     color: color-white
                     text-decoration: none
+
     .Header-searchBox
         font-size: 14px
         form
@@ -54,6 +55,30 @@
                 position: absolute
                 right: 10px
 
+.Header--searchHide
+    .Header-buttons
+        .Header-buttons-searchButton
+            display: none !important
+
+.Header--whiteVersion
+    background: color-white
+    .Header-buttons
+        color: color-black-b
+        .Header-buttons-searchButton
+            span
+                border-right: 2px solid color-black-b
+        .Header-buttons-searchButton, .Header-buttons-menuButton
+            background-color: transparent
+            &:hover
+                background-color: rgba(color-lime-green,75%)
+                color: color-white
+    .Header-nav
+        ul
+            li
+                a
+                    color: color-black-b
+        
+    
 @media screen and (min-width:320px)
     .Header
         position: relative
@@ -113,9 +138,21 @@
     .Header--searchActive
         .Header-searchBox
             display: block
+
+    .Header--whiteVersion
+        .Header-nav
+            background-color: color-gray
+            ul
+                li
+                    border-bottom: 1px solid rgba(color-black-b,30%)
+                    a
+                        &:hover
+                            background-color: rgba(color-lime-green,75%)
+                            color: color-white
+
+        .Header-searchBox
+            background-color: color-gray
 @media screen and (min-width:501px)
-    body
-        background-color: red !important
     .Header
         font-size: 0px !important
         overflow: hidden
@@ -191,6 +228,15 @@
                 display: none
         .Header-nav
             display: none
+
+    .Header--whiteVersion
+        .Header-nav
+            ul
+                li
+                    a
+                        &:hover
+                            background-color: rgba(color-lime-green,75%)
+                            
 
 @media screen and (min-width:768px)
     .Header

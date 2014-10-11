@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     (r'^$', TemplateView.as_view(template_name="index.html")),
     (r'^pieza', TemplateView.as_view(template_name="pieza.html")),
     (r'^investigacion', TemplateView.as_view(template_name="investigacion.html")),
+    (r'^about', TemplateView.as_view(template_name="about.html")),
     (r'^header/', TemplateView.as_view(template_name="partials/header.html"))
 )

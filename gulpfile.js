@@ -49,7 +49,7 @@ gulp.task('partials', function (){
 });
 
 gulp.task('stylus', function () {
-  var cssSrc = './desarrollo/static/stylus/main-investigacion.styl',
+  var cssSrc = './desarrollo/static/stylus/main-about.styl',
       cssDst = './sitioWeb/app/static/css';
 
   gulp.src(cssSrc)

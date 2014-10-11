@@ -1,0 +1,81 @@
+@import "normalize.styl"
+@import "nib"
+@import "colores.styl"
+@import "fuentes.styl"
+@import "iconos.styl"
+@import "utilidades.styl"
+@import "header.styl"
+@import "footer.styl"
+@import "pieza.styl"
+
+body
+    background-color: color-gray-b
+    font-family: 'source_sans_pro' !important
+    color: color-black-b
+    font-size: 16px
+
+.InvestigacionDetail
+	background-color: color-white
+	p
+			margin: 0
+	.InvestigacionDetail-header
+		border-bottom: 1px solid color-gray-b
+		margin-bottom: 20px
+		> p
+			font-size: 1.25rem
+		.Investigacion-info
+			overflow: hidden
+			padding: 10px 0px 0px 0px
+			
+			a
+				float: left
+				img
+					border-radius: 50%
+					font-size: 0px
+
+			p
+				float: right
+				padding: 5.5px 0px
+
+			a, p
+				font-size: 0.875rem
+	.InvestigacionDetail-content
+		> p
+			padding-bottom: 20px
+			border-bottom: 1px solid color-gray-b
+			
+		.InvestigacionDetail-content-referencias
+			padding-top: 10px
+			ul
+				margin: 0
+				padding: 0
+				list-style: none
+				li
+					a
+						display: inline-block
+						width: auto
+						word-break: break-all;
+
+.Piezas
+    .Piezas-content
+    	text-align: center
+        .Pieza
+            margin: 0px 10px 20px 0px
+            &:last-child
+                margin-bottom: 0px
+		
+
+.InvestigacionDetail-container, .Piezas-container
+    padding: 20px 10px
+
+@media screen and (min-width:510px)
+	.Piezas
+	    .Piezas-content
+	    	text-align: center
+	        .Pieza
+	            margin: 0px 20px 20px 0px
+
+@media screen and (min-width:1021px)
+	.InvestigacionDetail-container, .Piezas-container
+        margin: 0px auto
+        width: 1000px

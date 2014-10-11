@@ -1,0 +1,154 @@
+@import "normalize.styl"
+@import "nib"
+@import "colores.styl"
+@import "fuentes.styl"
+@import "iconos.styl"
+@import "utilidades.styl"
+@import "header.styl"
+@import "footer.styl"
+@import "investigacion.styl"
+body
+    background-color: color-gray-b
+    font-family: 'source_sans_pro' !important
+    color: color-black-b
+    font-size: 16px
+
+.Categoria
+    background-color: color-gray
+    color: color-strong-blue
+
+.Investigaciones
+    .Investigaciones-content
+        .Investigacion
+            display: block
+            margin-bottom: 20px
+            &:last-child
+                margin-bottom: 0px
+        
+
+.PiezaDetail
+    background-color: color-white
+
+    .PiezaDetail-container
+        overflow: hidden
+
+    .PiezaDetail-content
+        p
+            margin: 0
+            font-size: 1rem
+
+    .PiezaDetail-galeria
+        
+        .PiezaDetail-galeria-perfil
+            display: block
+
+        .PiezaDetail-galeria-secundarias
+            margin: 10px 10px 0px 0px
+
+    .PiezaDetail-header
+        h5
+            color: color-strong-blue
+            font-weight: normal
+
+        .PiezaDetail-header-info
+            color: color-black-b
+
+            p
+                font-size: 0.875rem
+                margin: 5px 0px
+
+                span
+                    margin-right: 5px
+                    &:before
+                        color: color-black
+                    &:last-child
+                        margin-right: 0px
+
+.Categoria-container
+    padding: 10px
+
+.PiezaDetail-container, .Investigaciones-container
+    padding: 20px 10px
+
+@media screen and (min-width:320px)
+    .PiezaDetail
+        .PiezaDetail-galeria
+            margin: 20px 0px
+
+            .PiezaDetail-galeria-perfil
+                display: block
+                margin: 0 auto
+                width: 75%
+                img
+                    width: 100%
+
+            .PiezaDetail-galeria-secundarias
+                display: none
+
+@media screen and (min-width:510px)
+    .Investigaciones
+        .Investigaciones-content
+            font-size: 0px
+            text-align: center
+            .Investigacion
+                display: inline-block
+                font-size: 1rem
+                vertical-align: top
+                width: 44%
+                &:nth-child(2n)
+                    margin-left: 10px
+    .PiezaDetail
+        overflow: hidden
+
+        .PiezaDetail-content, .PiezaDetail-header
+            float: right
+            width: 60%
+
+        .PiezaDetail-galeria
+            float: left
+            margin-top: 0px
+            width: 35%
+
+            .PiezaDetail-galeria-perfil
+                margin: 0
+                width: 100%
+
+        .PiezaDetail-content, .PiezaDetail-header, .PiezaDetail-galeria
+            display: inline-block
+            vertical-align: top
+
+@media screen and (min-width:768px)
+    .Investigaciones
+        .Investigaciones-content
+            .Investigacion
+                width: 28%
+                &:nth-child(2n)
+                    margin: 0px 10px
+    .PiezaDetail
+        .PiezaDetail-galeria
+            font-size: 0px
+
+            .PiezaDetail-galeria-secundarias
+                display: inline-block
+                vertical-align: top
+                width: 29%
+
+@media screen and (min-width:1021px)
+    .Investigaciones
+        .Investigaciones-content
+            .Investigacion
+                width: 22%
+                margin: 10px 0px 0px 10px
+                &:nth-child(2n)
+                    margin: 10px 0px 0px 10px
+
+    .PiezaDetail
+        .PiezaDetail-galeria
+            .PiezaDetail-galeria-secundarias
+                display: inline-block
+                vertical-align: top
+                width: 22%
+
+    .Categoria-container, .PiezaDetail-container, .Investigaciones-container
+            margin: 0px auto
+            width: 1000px

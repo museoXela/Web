@@ -2,6 +2,7 @@
     background-color: white
     border-radius: 5px
     display: inline-block
+    text-align: left
     width: 190px
 
     .Pieza-content
@@ -32,7 +33,7 @@
             .Pieza-actions-iconHeart
                 color: color-strong-red
                 float: right
-                font-family: 'icomoon';
+                font-family: 'icomoon'
                 font-size: 1.5rem
                 margin: 12px 0px
                 vertical-align: middle
@@ -43,11 +44,16 @@
                     &:before
                         content: "\e600"
 
-            .Pieza-actions-iconHeart--active
-                &:before
-                    content: "\e600"
+            
 
     .Pieza-logo
         font-size: 0px
         img
             border-radius: 5px 5px 0px 0px
+
+.Pieza--saved
+    .Pieza-content
+        .Pieza-actions
+            .Pieza-actions-iconHeart
+                &:before
+                    content: "\e600"

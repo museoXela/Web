@@ -1,0 +1,103 @@
+.SearchPieza
+    background-color: color-white
+    display: block
+    font-size: 0px
+    margin: 10px
+    overflow: hidden
+    position: relative
+    .Pieza-content
+        font-size: 0.875rem
+        margin-left: 240px
+        padding: 10px
+        > a
+            font-size: 1rem
+            margin-bottom: 10px
+        p
+            margin: 0
+
+        .Pieza-actions
+            border-top: 1px solid color-gray-b
+            bottom: 0
+            font-size: 0.875rem
+            left: 250px
+            overflow: hidden
+            position: absolute
+            right: 10px
+            a
+                background-color: color-dark-pynk
+                border-radius: 5px
+                color: color-white
+                display: inline-block
+                float: left
+                font-weight: bold
+                margin: 5px 0px
+                padding: 5px 10px
+                text-decoration: none
+                &:hover
+                    text-decoration: underline
+            .Pieza-actions-iconHeart
+                color: color-strong-red
+                float: right
+                font-family: 'icomoon'
+                font-size: 1.5rem
+                margin: 7px 0px
+                vertical-align: middle
+                &:before
+                    content: "\e601"
+                &:hover
+                    cursor: pointer
+                    &:before
+                        content: "\e600"
+
+        .Pieza-content-info
+            display: none
+            p
+                font-size: 0.875rem
+                margin: 5px 0px
+
+                span
+                    margin-right: 5px
+                    &:before
+                        color: color-black
+                    &:last-child
+                        margin-right: 0px
+
+    .Pieza-logo
+        width: 240px
+        float: left
+        img
+            width: 100%
+            
+    .Pieza-content, .Pieza-logo
+        vertical-align: top
+
+.SearchPieza--small
+    .Pieza-content
+        margin-left: 200px
+        > a
+            font-size: 1.5rem 
+        p
+            display: none
+        .Pieza-actions
+            left: 210px
+    .Pieza-logo
+        width: 200px
+
+.SearchPieza--medium
+        .Pieza-content
+            > a
+                font-size: 1.25rem 
+            p
+                display: block
+
+.SearchPieza--large
+        .Pieza-content
+            margin-left: 240px
+            p
+                font-size: 1.125rem
+            .Pieza-content-info
+                display: block
+            .Pieza-actions
+                left: 250px
+        .Pieza-logo
+            width: 240px

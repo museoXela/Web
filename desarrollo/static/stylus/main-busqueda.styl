@@ -8,8 +8,118 @@
 @import "footer.styl"
 @import "pieza.styl"
 @import "search-pieza.styl"
+@import "investigacion"
+
 body
     background-color: color-gray-b
     color: color-black-b
     font-family: 'source_sans_pro' !important
     font-size: 16px
+
+.SearchBox
+    background-color: color-white
+    button
+        font-size: 1.5rem
+        padding: 5.5px 10px
+    input 
+        padding: 6px 10px
+        width: 65%
+    label
+        display: block
+    button, input
+        display: inline-block
+        vertical-align: top
+
+.Search
+    .Search-results
+        display: block
+        h4
+            margin: 0px 0px 20px 0px
+        .Search-results-investigaciones
+            .Investigacion
+                margin-bottom: 20px
+        .Search-results-piezas
+            .SearchPieza
+                margin-bottom: 20px
+        .Search-results-piezas, .Search-results-investigaciones
+            display: block
+            width: 100%
+    .SearchOptions
+        background-color: color-white
+        padding: 20px 10px
+        border-radius: 5px
+        margin-bottom: 20px
+        p
+            margin: 0px 0px 10px 0px
+        .SearchOptions-check
+            padding-bottom: 10px
+            border-bottom: 1px solid color-gray-b
+            .SearchOptions-check-pieza
+                margin-bottom: 10px
+            > div
+                > label
+                    margin-left: 5px
+                    vertical-align: middle
+        .SearchOptions-selection
+            padding: 10px 0px 0px 0px
+            > div
+                display: block
+                select
+                    display: block
+                    width: 100%
+     
+.SearchBox-container, .SearchOptions, .Search
+    padding: 20px 10px
+
+@media screen and (min-width:510px)
+    .Search
+        .Search-results
+            .Search-results-investigaciones
+                text-align: center
+                .Investigacion
+                    display: inline-block
+                    font-size: 1rem
+                    vertical-align: top
+                    width: 44%
+                    &:nth-child(2n)
+                        margin-left: 10px
+
+@media screen and (min-width:768px)
+    .Search
+        .SearchOptions
+            .SearchOptions-check
+                border: none
+            .SearchOptions-check, .SearchOptions-selection
+                display: inline-block
+                padding: 0
+                vertical-align: top
+                width: 30%
+        .Search-results
+            .Search-results-investigaciones
+                .Investigacion
+                    width: 28%
+                    &:nth-child(2n)
+                        margin: 0px 10px
+                
+@media screen and (min-width:1021px)
+    .Search
+        .SearchOptions
+            width: 25%
+            .SearchOptions-check
+                border-bottom: 1px solid color-gray-b
+                padding-bottom: 10px
+            .SearchOptions-selection
+                padding-top: 10px
+            .SearchOptions-check, .SearchOptions-selection
+                display: block
+                vertical-align: top
+                width: 100%
+        .Search-results
+            margin-left: 20px
+            width: 70%
+        .SearchOptions, .Search-results
+            display: inline-block
+            vertical-align: top
+    .SearchBox-container, .Search-container
+        margin: 0px auto
+        width: 1000px

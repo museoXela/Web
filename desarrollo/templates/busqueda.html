@@ -8,7 +8,66 @@
 </head>
 <body>
 	{% include "partials/header.html" %}
-	{% include "partials/pieza.html" %}
+	<section class="SearchBox">
+		<div class="SearchBox-container">
+			<label for="search">Ingresa tu busqueda:</label>
+			<input id="search" type="search" name="search" class="u-input" placeholder="Busca piezas e investigaciones">
+			<button class="u-boton icon-search"></button>
+		</div>
+	</section>
+	<section class="Search">
+		<div class="Search-container">
+			<section class="SearchOptions">
+				<section class="SearchOptions-check">
+					<p>¿Qué deseas buscar?</p>
+					<div class="SearchOptions-check-pieza">
+						<div class="u-checkbox">
+							<input type="checkbox" id="checkPieza" value="">
+							<label for="checkPieza"></label>
+						</div>
+						<label for="checkPieza">Piezas</label>
+					</div>
+					<div class="SearchOptions-check-investigacion">
+						<div class="u-checkbox">
+							<input type="checkbox" id="checkInvestigacion" value="">
+							<label for="checkInvestigacion"></label>
+						</div>
+						<label for="checkInvestigacion">Investigaciones</label>
+					</div>
+				</section>
+				<section class="SearchOptions-selection">
+					<p>Filtra por categoria:</p>
+					<div class="u-select">
+						<select id="selectCategoria">
+					      	<option>Todas</option>
+					      	<option>Cerámica</option>
+					      	<option>Fototeca</option>
+					      	<option>Botanica</option>
+					    </select>
+					</div>
+				</section>
+			</section>
+			<section class="Search-results">
+				<h4 class="u-mensajeResultados">Se han encontrado 26 resultados</h4>
+				<section class="Search-results-piezas">
+					{% include "partials/pieza.html" %}
+					{% include "partials/pieza.html" %}
+					{% include "partials/pieza.html" %}
+					{% include "partials/pieza.html" %}
+				</section>
+				<h4 class="u-mensajeResultados">Investigaciones</h4>
+				<section class="Search-results-investigaciones">
+					{% include "partials/investigacion.html" %}
+					{% include "partials/investigacion.html" %}
+					{% include "partials/investigacion.html" %}
+					{% include "partials/investigacion.html" %}
+				</section>
+			</section>
+
+		</div>
+	</section>
+	
+	
 	{% include "partials/footer.html" %}
 	<script src="../static/js/main-index.js"></script>
 </body>

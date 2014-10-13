@@ -2,7 +2,6 @@
     background-color: color-white
     display: block
     font-size: 0px
-    margin: 10px
     overflow: hidden
     position: relative
     .Pieza-content
@@ -71,26 +70,39 @@
     .Pieza-content, .Pieza-logo
         vertical-align: top
 
-.SearchPieza--small
-    .Pieza-content
-        margin-left: 200px
-        > a
-            font-size: 1.5rem 
-        p
-            display: none
-        .Pieza-actions
-            left: 210px
-    .Pieza-logo
-        width: 200px
+@media screen and (min-width:320px)
+    .SearchPieza
+        .Pieza-content
+            margin-left: 150px
+            > a
+                font-size: 1.5rem 
+            p
+                display: none
+            .Pieza-actions
+                left: 160px
+        .Pieza-logo
+            width: 150px
 
-.SearchPieza--medium
+@media screen and (min-width:510px)
+    .SearchPieza
         .Pieza-content
             > a
                 font-size: 1.25rem 
             p
                 display: block
 
-.SearchPieza--large
+@media screen and (min-width:768px)
+    .SearchPieza
+        .Pieza-content
+            margin-left: 200px
+            > a
+                font-size: 1.5rem 
+            .Pieza-actions
+                left: 210px
+        .Pieza-logo
+            width: 200px
+@media screen and (min-width:1021px)
+    .SearchPieza
         .Pieza-content
             margin-left: 240px
             p

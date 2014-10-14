@@ -6,9 +6,19 @@
 @import "utilidades.styl"
 @import "header.styl"
 @import "footer.styl"
-@import "investigacion.styl"
+@import "evento-card.styl"
 body
     background-color: color-gray-b
     font-family: 'source_sans_pro' !important
     color: color-black-b
     font-size: 16px
+.Eventos
+	.Eventos-content
+		.EventoCard
+			margin-bottom: 10px
+.Eventos-container
+	margin: 20px 10px
+@media screen and (min-width:1021px)
+	.Eventos
+            margin: 0px auto
+            width: 1000px

@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     (r'^about', TemplateView.as_view(template_name="about.html")),
     (r'^busqueda', TemplateView.as_view(template_name="busqueda.html")),
     (r'^eventos', TemplateView.as_view(template_name="eventos.html")),
+    (r'^colecciones', TemplateView.as_view(template_name="colecciones.html")),
     (r'^header/', TemplateView.as_view(template_name="partials/header.html"))
 )

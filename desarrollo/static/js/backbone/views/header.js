@@ -1,7 +1,6 @@
 var Backbone = require('backbone'),
     $ = require('jquery'),
-    _ = require('underscore'),
-    swig = require('swig');
+    _ = require('underscore');
 
 module.exports = Backbone.View.extend({
   el: $('#Header'),
@@ -10,7 +9,11 @@ module.exports = Backbone.View.extend({
     'click #Header-buttons-menuButton': 'displayMenu',
     'click #Header-buttons-searchButton': 'displaySearchBox'
   },
-  initialize: function () {
+  initialize: function (options) {
+    this.options = options || {};
+    if(this.options.config === 1){
+      this.$el.addClass('Header--searchHide')      
+    }
     //this.listenTo(this.model, "change", this.render, this);
   },
 

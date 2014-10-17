@@ -2,15 +2,15 @@
 <header class="Header" id="Header">
 	<div class="Header-container">
 		<section class="Header-logo">
-			<a href="#">
+			<a href="/">
 				<img src='{%static "img/eff2f3.png" %}' alt="Museo de historia natural" height="35"/>
 			</a>	
 		</section>
 		<nav class="Header-nav" id="Header-nav">
 			<ul>
-				<li><a href="#">Colecciones</a></li>
-				<li><a href="#">Eventos</a></li>
-				<li><a href="#">Acerca de</a></li>
+				<li><a href="/colecciones/">Colecciones</a></li>
+				<li><a href="/eventos/">Eventos</a></li>
+				<li><a href="/about/">Acerca de</a></li>
 			</ul>
 		</nav>
 		<section class="Header-buttons">
@@ -20,7 +20,7 @@
 			<button class="Header-buttons-menuButton" id="Header-buttons-menuButton"><span class="icon-list"></span></button>
 		</section>
 		<section class="Header-searchBox">
-			<form action="" id="Header-searchBox-form">
+			<form action="/busqueda/" id="Header-searchBox-form">
 				<input id="GET-search" type="search" name="search" placeholder="Ingresa tu busqueda">
 				<span class="icon-search"></span>
 			</form>

@@ -20,7 +20,7 @@ function browserifyShare(){
     bundleShare(b);
   });
   
-  b.add('./desarrollo/static/js/header.js');
+  b.add('./desarrollo/static/js/main-index.js');
   bundleShare(b);
 }
 
@@ -49,7 +49,7 @@ gulp.task('partials', function (){
 });
 
 gulp.task('stylus', function () {
-  var cssSrc = './desarrollo/static/stylus/main-colecciones.styl',
+  var cssSrc = './desarrollo/static/stylus/main-index.styl',
       cssDst = './sitioWeb/app/static/css';
 
   gulp.src(cssSrc)

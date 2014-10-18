@@ -16,7 +16,7 @@
 			<section class="Presentacion-content">
 				<h1>Propuesta de valor principal</h1>
 				<h3>Grumpy wizards make toxic brew for the evil Queen and Jack.</h3>
-				<form action="" id="Presentacion-form">
+				<form action="/busqueda/" id="Presentacion-form">
 					<input id="GET-search" type="search" name="search" placeholder="Ingresa tu busqueda">
 					<span class="icon-search"></span>
 				</form>
@@ -94,17 +94,14 @@
 	<section class="Piezas">
 		<div class="Piezas-container">
 			<h4 class="u-mensajeResultados">Piezas guardadas</h4>
-			<section class="Piezas-content">
-				{% include "partials/pieza.html" %}
-				{% include "partials/pieza.html" %}
-				{% include "partials/pieza.html" %}
-				{% include "partials/pieza.html" %}
-				{% include "partials/pieza.html" %}
-				{% include "partials/pieza.html" %}
+			<section id="Piezas-content" class="Piezas-content">
+				
 			</section>
 		</div>
 	</section>
-
+	<script id="pieza-template" type = "text/template">
+		{% include "partials/pieza.html" %}
+	</script>
 	{% include "partials/footer.html" %}
 	<script src="../static/js/main-index.js"></script>
 </body>

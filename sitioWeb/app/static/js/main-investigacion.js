@@ -1,71 +1,94 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./desarrollo/static/js/main-pieza.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./desarrollo/static/js/main-investigacion.js":[function(require,module,exports){
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
     Q = require('q'),
-    Investigaciones = require('./backbone/collections/investigaciones'),
-    PiezaView = require('./backbone/views/piezaDetail'),
-    InvestigacionesListView = require('./backbone/views/investigaciones'),
-    utilidades = require('./utilidades');
+    Piezas = require('./backbone/collections/piezas'),
+    InvestigacionView = require('./backbone/views/investigacionDetail'),
+    PiezasListView = require('./backbone/views/piezas');
 	Backbone.$ = $;
 
 function configuraciones() {
-    var investigacionesCollection = new Investigaciones();
-	window.state = 'piezaDetail';
+    var piezasCollection = new Piezas();
+	window.state = 'investigacionDetail';
     return {
-        cargarFuncionalidad: function (){
-            var investigacionesList = new InvestigacionesListView({
-                    el: $('#Investigaciones-content'),
-                }, investigacionesCollection);
-            this.getPiezaDetail().then(function(data){
-                var pieza = new PiezaView({ model: data });
-                $('.Investigaciones').before(pieza.render().el);
+        cargarFuncionalidad: function(){
+            var piezasList = new PiezasListView({
+                    el: $('#Piezas-content'),
+                }, piezasCollection);
+            this.getInvestigacionDetail().then(function(data){
+                var investigacion = new InvestigacionView({ model: data });
+                $('.Piezas').before(investigacion.render().el);
             });
-            this.getInvestigaciones();
+            this.getPiezas();
         },
-        getInvestigaciones: function(){
-            var data = {};
-            data.codigoPieza = window.location.pathname.split('/')[2];
-            data.recurso = 'piezaInvestigaciones'
-            url = '/buscar/'
-            $.get(url, data, function(investigacionesResponse){
-                investigaciones = JSON.parse(investigacionesResponse);
-                _.each(investigaciones, function(investigacion){
-                    investigacionesCollection.add(investigacion);
-                });
-            });
-        },
-        getPiezaDetail: function (){
+        getInvestigacionDetail: function (){
             var deferred = Q.defer()
             var data = {};
-            data.codigoPieza = window.location.pathname.split('/')[2];
-            data.recurso = 'piezaDetail'
-            url = '/buscar/'
-            $.get(url, data, function(piezaResponse){
-                pieza = JSON.parse(piezaResponse);
-                deferred.resolve(pieza);
+            data.codigoInvestigacion = window.location.pathname.split('/')[2];
+            data.recurso = 'investigacionDetail';
+            url = '/buscar/';
+            $.get(url, data, function(investigacionResponse){
+                var investigacionDetail = JSON.parse(investigacionResponse);
+                deferred.resolve(investigacionDetail);
             });
             return deferred.promise;
+        },
+        getPiezas: function(){
+            var data = {};
+            data.codigoInvestigacion = window.location.pathname.split('/')[2];
+            data.recurso = 'investigacionPiezas'
+            url = '/buscar/'
+            $.get(url, data, function(piezasResponse){
+                piezas = JSON.parse(piezasResponse);
+                _.each(piezas, function(pieza){
+                    console.log(pieza)
+                    piezasCollection.add(pieza);
+                });
+            });
         }
+
     }
 };
 
 $(function(){
-    var configuracionInicial = configuraciones();
-    configuracionInicial.cargarFuncionalidad();
+	var configuracionInicial = configuraciones();
+	configuracionInicial.cargarFuncionalidad();
 });
-},{"./backbone/collections/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js","./backbone/views/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigaciones.js","./backbone/views/piezaDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezaDetail.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","q":"/home/jescalante/Documentos/Github/Web/node_modules/q/q.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js":[function(require,module,exports){
+},{"./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/investigacionDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacionDetail.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","q":"/home/jescalante/Documentos/Github/Web/node_modules/q/q.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js":[function(require,module,exports){
 var Backbone = require('backbone'),
-    Investigacion     = require('../models/investigacion');
+    Pieza     = require('../models/pieza');
 
 module.exports = Backbone.Collection.extend({
-  model: Investigacion
+  model: Pieza
 });
-},{"../models/investigacion":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/investigacion.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/investigacion.js":[function(require,module,exports){
+},{"../models/pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/pieza.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/pieza.js":[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacion.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacionDetail.js":[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore'),
+    swig = require('swig'),
+    utilidades = require('../../utilidades');
+
+module.exports = Backbone.View.extend({
+  tagName: 'section',
+  className: 'InvestigacionDetail',
+
+  events: {},
+  template: swig.compile($('#InvestigacionDetail-template').html()),
+  initialize: function () {
+    //this.listenTo(this.model, "change", this.render, this);
+  },
+
+  render: function () {
+    this.$el.html(this.template(this.model));
+    return this;
+  }
+});
+},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -74,30 +97,49 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.View.extend({
   tagName: 'article',
-  className: 'Investigacion',
+  className: 'Pieza',
 
   events: {
+    'click .Pieza-actions-iconHeart': 'toggleSave',
   },
-  template: swig.compile($("#investigacion-template").html()),
+  template: swig.compile($("#pieza-template").html()),
   initialize: function () {
     //this.listenTo(this.model, "change", this.render, this);
   },
 
   render: function () {
     var pieza = this.model.toJSON();
+    if(pieza.almacenado===true)
+      this.$el.addClass('Pieza--saved');
     this.$el.html(this.template(pieza));
     return this;
+  },
+  toggleSave: function(event) {
+    var pieza = this.model.toJSON();
+    var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
+    var piezasActualizadas = [];
+    debugger;
+    if(pieza.almacenado===true){
+      piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
+      utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)
+      if(window.state === 'index'){
+        this.collection.remove(this.model);
+        this.$el.remove();
+      }
+      pieza.almacenado = false;
+    }else{
+      pieza.almacenado = true;
+    };
+    this.model.set(pieza);
   }
 });
-},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigaciones.js":[function(require,module,exports){
+},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
-    InvestigacionView = require('./investigacion');
+    PiezaView = require('./pieza');
 
 module.exports = Backbone.View.extend({
-  events: {
-  },
   initialize: function (options, collection) {
     this.collection = collection || {};
     this.options = options || {};
@@ -111,39 +153,15 @@ module.exports = Backbone.View.extend({
     this.addAll();
   },
 
-  addOne: function (investigacion) {
-    var investigacionView = new InvestigacionView({ model: investigacion, collection: this.collection });
-    this.$el.append(investigacionView.render().el);
+  addOne: function (pieza) {
+    var piezaView = new PiezaView({ model: pieza, collection: this.collection });
+    this.$el.append(piezaView.render().el);
   },
   addAll: function () {
     this.collection.forEach(this.addOne, this);
   }
 });
-},{"./investigacion":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacion.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezaDetail.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    swig = require('swig'),
-    utilidades = require('../../utilidades');
-
-module.exports = Backbone.View.extend({
-  tagName: 'section',
-  className: 'PiezaDetail',
-
-  events: {
-    'click .Pieza-actions-iconHeart': 'toggleSave',
-  },
-  template: swig.compile($('#PiezaDetail-template').html()),
-  initialize: function () {
-    //this.listenTo(this.model, "change", this.render, this);
-  },
-
-  render: function () {
-    this.$el.html(this.template(this.model));
-    return this;
-  }
-});
-},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
+},{"./pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
 var $ = require('jquery'),
     _ = require('underscore'),
     q = require('q');
@@ -19985,4 +20003,4 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}]},{},["./desarrollo/static/js/main-pieza.js"]);
+},{}]},{},["./desarrollo/static/js/main-investigacion.js"]);

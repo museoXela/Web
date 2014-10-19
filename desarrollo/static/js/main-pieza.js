@@ -30,7 +30,6 @@ function configuraciones() {
             $.get(url, data, function(investigacionesResponse){
                 investigaciones = JSON.parse(investigacionesResponse);
                 _.each(investigaciones, function(investigacion){
-                    console.log(investigacion)
                     investigacionesCollection.add(investigacion);
                 });
             });
@@ -53,5 +52,4 @@ function configuraciones() {
 $(function(){
     var configuracionInicial = configuraciones();
     configuracionInicial.cargarFuncionalidad();
-	console.log("Hello world");
 });

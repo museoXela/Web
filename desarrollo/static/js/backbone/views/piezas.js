@@ -4,8 +4,6 @@ var Backbone = require('backbone'),
     PiezaView = require('./pieza');
 
 module.exports = Backbone.View.extend({
-  events: {
-  },
   initialize: function (options, collection) {
     this.collection = collection || {};
     this.options = options || {};

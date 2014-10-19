@@ -1,9 +1,11 @@
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
-    PiezaView = require('./pieza');
+    InvestigacionView = require('./investigacion');
 
 module.exports = Backbone.View.extend({
+  events: {
+  },
   initialize: function (options, collection) {
     this.collection = collection || {};
     this.options = options || {};
@@ -17,9 +19,9 @@ module.exports = Backbone.View.extend({
     this.addAll();
   },
 
-  addOne: function (pieza) {
-    var piezaView = new PiezaView({ model: pieza, collection: this.collection });
-    this.$el.append(piezaView.render().el);
+  addOne: function (investigacion) {
+    var investigacionView = new InvestigacionView({ model: investigacion, collection: this.collection });
+    this.$el.append(investigacionView.render().el);
   },
   addAll: function () {
     this.collection.forEach(this.addOne, this);

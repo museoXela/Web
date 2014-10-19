@@ -15,43 +15,40 @@
 			<a href="#" class="u-enlaces">Figurillas</a>
 		</div>	
 	</section>
-	<section class="PiezaDetail">
-		<div class="PiezaDetail-container">
-			<section class="PiezaDetail-header">
-				<h5>Toci, la diosa abuela</h5>
-				<section class="PiezaDetail-header-info">
-					<p><span class="icon-earth">&nbsp;Guatemala</span>
-					<span class="icon-ruler">&nbsp;23x30 cm</span>
-					<span class="icon-dating">&nbsp;Siglo XVII</span></p>
-				</section>
-			</section>
-			<section class="PiezaDetail-galeria">
-				<img class="PiezaDetail-galeria-perfil" src='{%static "img/olmeca.jpg" %}' alt="pieza">
-				<img class="PiezaDetail-galeria-secundarias" src='{%static "img/olmeca.jpg" %}' alt="pieza" width="75">
-				<img class="PiezaDetail-galeria-secundarias" src='{%static "img/olmeca.jpg" %}' alt="pieza" width="75">
-				<img class="PiezaDetail-galeria-secundarias" src='{%static "img/olmeca.jpg" %}' alt="pieza" width="75">
-				<img class="PiezaDetail-galeria-secundarias" src='{%static "img/olmeca.jpg" %}' alt="pieza" width="75">
-			</section>
-			<section class="PiezaDetail-content">
-				<p>La muestra, organizada por el Instituto Nacional de Antropología e Historia (INAH), está conformada por un centenar de piezas arqueológicas provenientes de las culturas olmeca, totonaca, nahua del Altiplano y mixteca, que se asentaron principalmente en Veracruz, Puebla y Tlaxcala.
-
-				Entre las piezas destacan esculturas de antiguas diosas, figurillas antropomorfas de mujeres, accesorios de jadeíta, obsidiana y cristal de roca, estuches de barro para "maquillaje", peines de hueso y trozos de minerales que eran utilizados como espejos.sjksdnjkfdProcedente del Museo Regional de Puebla y bajo la curaduría del arqueólogo Eduardo Merlo, la exposición gira en torno a las actividades cotidianas que desarrollaba la mujer prehispánica, como la elaboración de textiles, la alfarería y la agricultura.Asimismo, aborda uno de los papeles más importantes que tenía la mujer dentro de esta sociedad, la prostitución, que a diferencia de hoy en día era bien vista por la comunidad, ya que era una forma de evitar que los hombres que iban a la guerra violaran a las mujeres de los pueblos conquistados, sostuvo Merlo.La diversidad de actividades propias del sexo femenino en la época prehispánica quedó plasmada en objetos de uso cotidiano, figurillas de barro y esculturas de algunas deidades.Entre los objetos que reúne "Diosas y mortales" destacan tres figurillas de barro de la cultura olmeca, con la representación de mujeres embarazadas, las cuales datan del siglo IV a.C.También incluye seis esculturas de piedra basáltica que hacen alusión a seis diosas asociadas a las actividades realizadas por las mujeres, como Chalchiuhtlicue, deidad del agua, la cual data del año 500 d.C.</p>
-			</section>
-		</div>
-	</section>
+	
 	<section class="Investigaciones">
 		<div class="Investigaciones-container">
 			<h4 class="u-mensajeResultados">Investigaciones</h4>
-			<section class="Investigaciones-content">
-				{% include "partials/investigacion.html" %}
-				{% include "partials/investigacion.html" %}
-				{% include "partials/investigacion.html" %}
-				{% include "partials/investigacion.html" %}
-				{% include "partials/investigacion.html" %}
+			<section id="Investigaciones-content" class="Investigaciones-content">
+				
 			</section>	
 		</div>
 	</section>
 	{% include "partials/footer.html" %}
-	<script src="../static/js/main-index.js"></script>
+	<script id="PiezaDetail-template" type = "text/template">
+		<div class="PiezaDetail-container">
+			{% verbatim %}
+			<section class="PiezaDetail-header">
+				<h5>{{nombre}}</h5>
+				<section class="PiezaDetail-header-info">
+					<p><span class="icon-earth">&nbsp;{{procedencia}}</span>
+					<span class="icon-dating">&nbsp;{{fechamiento}}</span></p>
+				</section>
+			</section>
+			{% endverbatim %}
+			<section class="PiezaDetail-galeria">
+				<img class="PiezaDetail-galeria-perfil" src='{%static "img/olmeca.jpg" %}' alt="pieza">
+			</section>
+			{% verbatim %}
+			<section class="PiezaDetail-content">
+				<p>{{descripcion}}</p>
+			</section>
+			{% endverbatim %}
+		</div>
+	</script>
+	<script id="investigacion-template" type = "text/template">
+		{% include "partials/investigacion.html" %}
+	</script>
+	<script src='{%static "js/main-pieza.js" %}'></script>
 </body>
 </html>

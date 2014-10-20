@@ -1,38 +1,24 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./desarrollo/static/js/main-index.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./desarrollo/static/js/main-eventos.js":[function(require,module,exports){
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
-	Piezas = require('./backbone/collections/piezas'),
 	Eventos = require('./backbone/collections/eventos'),
     HeaderView = require('./backbone/views/header'),
-	PiezaView = require('./backbone/views/pieza'),
-	PiezasListView = require('./backbone/views/piezas'),
 	EventosListView = require('./backbone/views/eventos'),
     utilidades = require('./utilidades');
 	Backbone.$ = $;
-
 function configuraciones() {
-	var piezas = new Piezas(),
-        eventosCollection = new Eventos();
+	var eventosCollection = new Eventos();
 	window.state = 'index';
     return {
     	cargarFuncionalidad: function (){
-    		var header = new HeaderView({ config: 1 }),
-    			piezasList = new PiezasListView({
-    				el: $('#Piezas-content'),
-    			}, piezas),
+    		var header = new HeaderView({ config: 0 }),
                 eventosList = new EventosListView({
                     el: $('#Eventos-content')
                 }, eventosCollection);
-            this.getEventos();
+            this.getEventos();   
     	},
-    	cargarPiezas: function(){
-    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
-    		_.each(piezasGuardadas, function(pieza){
-    			piezas.add(pieza);
-    		});
-    	},
-        getEventos: function(){
+    	getEventos: function(){
             /*var dataEventos = {
                 recurso:'eventos'
             };
@@ -41,37 +27,26 @@ function configuraciones() {
                     eventosCollection.add(evento);
                 });
             });*/
+			debugger;
             for(var i=0; i < 3; i++){
-                eventosCollection.add({titulo: 'Evento '+i})
+                eventosCollection.add({titulo: 'Evento '+i, tipo: 'EventoCard'})
             };
         }
     }
 };
-
 $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
-	configuracionInicial.cargarPiezas();
+	console.log('Start app')
 });
-},{"./backbone/collections/eventos":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/eventos.js","./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/eventos":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/eventos.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/eventos.js":[function(require,module,exports){
+},{"./backbone/collections/eventos":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/eventos.js","./backbone/views/eventos":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/eventos.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/eventos.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     Evento     = require('../models/evento');
 
 module.exports = Backbone.Collection.extend({
   model: Evento
 });
-},{"../models/evento":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/evento.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    Pieza     = require('../models/pieza');
-
-module.exports = Backbone.Collection.extend({
-  model: Pieza
-});
-},{"../models/pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/pieza.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/evento.js":[function(require,module,exports){
-var Backbone = require('backbone');
-
-module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/pieza.js":[function(require,module,exports){
+},{"../models/evento":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/evento.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/evento.js":[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({});
@@ -95,6 +70,10 @@ module.exports = Backbone.View.extend({
 
   render: function () {
     var evento = this.model.toJSON();
+    if(evento.tipo === 'EventoCard'){
+      this.$el.removeClass('Evento');
+      this.$el.addClass('EventoCard');
+    }
     this.$el.html(this.template(evento));
     return this;
   }
@@ -161,80 +140,7 @@ module.exports = Backbone.View.extend({
     this.$el.toggleClass('Header--searchActive');
   },
 });
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    swig = require('swig'),
-    utilidades = require('../../utilidades');
-
-module.exports = Backbone.View.extend({
-  tagName: 'article',
-  className: 'Pieza',
-
-  events: {
-    'click .Pieza-actions-iconHeart': 'toggleSave',
-  },
-  template: swig.compile($("#pieza-template").html()),
-  initialize: function () {
-    //this.listenTo(this.model, "change", this.render, this);
-  },
-
-  render: function () {
-    var pieza = this.model.toJSON();
-    if(pieza.almacenado===true)
-      this.$el.addClass('Pieza--saved');
-    this.$el.html(this.template(pieza));
-    return this;
-  },
-  toggleSave: function(event) {
-    var pieza = this.model.toJSON();
-    var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
-    var piezasActualizadas = [];
-    debugger;
-    if(pieza.almacenado===true){
-      piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
-      utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)
-      if(window.state === 'index'){
-        this.collection.remove(this.model);
-        this.$el.remove();
-      }
-      pieza.almacenado = false;
-    }else{
-      pieza.almacenado = true;
-    };
-    this.model.set(pieza);
-  }
-});
-},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    PiezaView = require('./pieza');
-
-module.exports = Backbone.View.extend({
-  initialize: function (options, collection) {
-    this.collection = collection || {};
-    this.options = options || {};
-    this.el = this.options.el;
-    this.listenTo(this.collection, "add", this.addOne, this);
-    this.listenTo(this.collection, "reset", this.render, this);
-  },
-
-  render: function () {
-    this.$el.empty();
-    this.addAll();
-  },
-
-  addOne: function (pieza) {
-    var piezaView = new PiezaView({ model: pieza, collection: this.collection });
-    this.$el.append(piezaView.render().el);
-  },
-  addAll: function () {
-    this.collection.forEach(this.addOne, this);
-  }
-});
-},{"./pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
 var $ = require('jquery'),
     _ = require('underscore'),
     Q = require('q');
@@ -20070,4 +19976,4 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}]},{},["./desarrollo/static/js/main-index.js"]);
+},{}]},{},["./desarrollo/static/js/main-eventos.js"]);

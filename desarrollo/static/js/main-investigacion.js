@@ -1,47 +1,44 @@
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
-    Q = require('q'),
     Piezas = require('./backbone/collections/piezas'),
+    HeaderView = require('./backbone/views/header'), 
     InvestigacionView = require('./backbone/views/investigacionDetail'),
-    PiezasListView = require('./backbone/views/piezas');
-	Backbone.$ = $;
+    PiezasListView = require('./backbone/views/piezas'),
+	utilidades = require('./utilidades');
+    Backbone.$ = $;
 
 function configuraciones() {
-    var piezasCollection = new Piezas();
+    var piezasCollection = new Piezas(),
+        investigacion = new InvestigacionView(),
+        codigoInvestigacion = window.location.pathname.split('/')[2];
 	window.state = 'investigacionDetail';
     return {
         cargarFuncionalidad: function(){
-            var piezasList = new PiezasListView({
+            var header = new HeaderView({ config: 0 }),
+                piezasList = new PiezasListView({
                     el: $('#Piezas-content'),
                 }, piezasCollection);
-            this.getInvestigacionDetail().then(function(data){
-                var investigacion = new InvestigacionView({ model: data });
-                $('.Piezas').before(investigacion.render().el);
-            });
+            this.getInvestigacion();
             this.getPiezas();
         },
-        getInvestigacionDetail: function (){
-            var deferred = Q.defer()
-            var data = {};
-            data.codigoInvestigacion = window.location.pathname.split('/')[2];
-            data.recurso = 'investigacionDetail';
-            url = '/buscar/';
-            $.get(url, data, function(investigacionResponse){
-                var investigacionDetail = JSON.parse(investigacionResponse);
-                deferred.resolve(investigacionDetail);
+        getInvestigacion: function(){
+            var dataInvestigacion = {
+                codigoInvestigacion: codigoInvestigacion,
+                recurso: 'investigacionDetail'
+            };
+            utilidades.getJSON(dataInvestigacion).then(function(data){
+                investigacion = new InvestigacionView({ model: data });
+                $('.Piezas').before(investigacion.render().el);
             });
-            return deferred.promise;
         },
         getPiezas: function(){
-            var data = {};
-            data.codigoInvestigacion = window.location.pathname.split('/')[2];
-            data.recurso = 'investigacionPiezas'
-            url = '/buscar/'
-            $.get(url, data, function(piezasResponse){
-                piezas = JSON.parse(piezasResponse);
-                _.each(piezas, function(pieza){
-                    console.log(pieza)
+            var dataPiezas = {
+                codigoInvestigacion: codigoInvestigacion,
+                recurso:'investigacionPiezas'
+            };
+            utilidades.getJSON(dataPiezas).then(function(data){
+                _.each(data, function(pieza){
                     piezasCollection.add(pieza);
                 });
             });

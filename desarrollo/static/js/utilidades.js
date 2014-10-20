@@ -1,23 +1,17 @@
 var $ = require('jquery'),
     _ = require('underscore'),
-    q = require('q');
+    Q = require('q');
 
 module.exports = (function  () {
     return {
-        loadTemplate : function (url){
-            $.ajax({
-                url: '/pruebas/header',
-                dataType: 'html',
-                success: function(data){
-                    deferred.resolve(data);
-                },
-                error: function(error){
-                    deferred.reject('<p>Algo ha salido mal</p>');
-                },
-                always: function(data){
-                     $.trigger("TEMPLATE_LOADED", [url]);
-                }
+        getJSON : function(data){
+            url = '/buscar/';
+            var deferred = Q.defer()
+            $.get(url, data, function(jsonResponse){
+                var objectResponse = JSON.parse(jsonResponse);
+                deferred.resolve(objectResponse);
             });
+            return deferred.promise;
         },
         getLocalStorage : function(key){
             item = localStorage.getItem(key);

@@ -2,50 +2,47 @@
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
-    Q = require('q'),
     Investigaciones = require('./backbone/collections/investigaciones'),
+    HeaderView = require('./backbone/views/header'), 
     PiezaView = require('./backbone/views/piezaDetail'),
     InvestigacionesListView = require('./backbone/views/investigaciones'),
     utilidades = require('./utilidades');
 	Backbone.$ = $;
 
 function configuraciones() {
-    var investigacionesCollection = new Investigaciones();
+    var investigacionesCollection = new Investigaciones(),
+        pieza = new PiezaView(),
+        codigoPieza = window.location.pathname.split('/')[2];
 	window.state = 'piezaDetail';
     return {
         cargarFuncionalidad: function (){
-            var investigacionesList = new InvestigacionesListView({
-                    el: $('#Investigaciones-content'),
+            var header = new HeaderView({ config: 0 }),
+                investigacionesList = new InvestigacionesListView({
+                    el: $('#Investigaciones-content') 
                 }, investigacionesCollection);
-            this.getPiezaDetail().then(function(data){
-                var pieza = new PiezaView({ model: data });
-                $('.Investigaciones').before(pieza.render().el);
-            });
+            this.getPieza();
             this.getInvestigaciones();
         },
         getInvestigaciones: function(){
-            var data = {};
-            data.codigoPieza = window.location.pathname.split('/')[2];
-            data.recurso = 'piezaInvestigaciones'
-            url = '/buscar/'
-            $.get(url, data, function(investigacionesResponse){
-                investigaciones = JSON.parse(investigacionesResponse);
-                _.each(investigaciones, function(investigacion){
+            var dataInvestigaciones = {
+                codigoPieza: codigoPieza,
+                recurso:'piezaInvestigaciones'
+            };
+            utilidades.getJSON(dataInvestigaciones).then(function(data){
+                _.each(data, function(investigacion){
                     investigacionesCollection.add(investigacion);
                 });
             });
         },
-        getPiezaDetail: function (){
-            var deferred = Q.defer()
-            var data = {};
-            data.codigoPieza = window.location.pathname.split('/')[2];
-            data.recurso = 'piezaDetail'
-            url = '/buscar/'
-            $.get(url, data, function(piezaResponse){
-                pieza = JSON.parse(piezaResponse);
-                deferred.resolve(pieza);
+        getPieza: function (){
+            var dataPieza = {
+                codigoPieza: codigoPieza,
+                recurso: 'piezaDetail'
+            };
+            utilidades.getJSON(dataPieza).then(function(data){
+                pieza = new PiezaView({ model: data });
+                $('.Investigaciones').before(pieza.render().el);
             });
-            return deferred.promise;
         }
     }
 };
@@ -54,7 +51,7 @@ $(function(){
     var configuracionInicial = configuraciones();
     configuracionInicial.cargarFuncionalidad();
 });
-},{"./backbone/collections/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js","./backbone/views/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigaciones.js","./backbone/views/piezaDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezaDetail.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","q":"/home/jescalante/Documentos/Github/Web/node_modules/q/q.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js":[function(require,module,exports){
+},{"./backbone/collections/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigaciones.js","./backbone/views/piezaDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezaDetail.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     Investigacion     = require('../models/investigacion');
 
@@ -65,7 +62,39 @@ module.exports = Backbone.Collection.extend({
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacion.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js":[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+
+module.exports = Backbone.View.extend({
+  el: $('#Header'),
+
+  events: {
+    'click #Header-buttons-menuButton': 'displayMenu',
+    'click #Header-buttons-searchButton': 'displaySearchBox'
+  },
+  initialize: function (options) {
+    this.options = options || {};
+    if(this.options.config === 1){
+      this.$el.addClass('Header--searchHide')      
+    }
+    //this.listenTo(this.model, "change", this.render, this);
+  },
+
+  render: function () {
+    return this;
+  },
+  displayMenu: function (){
+    this.$el.removeClass('Header--searchActive');
+  	this.$el.toggleClass('Header--menuActive');
+  },
+  displaySearchBox: function (){
+    this.$el.removeClass('Header--menuActive');
+    this.$el.toggleClass('Header--searchActive');
+  },
+});
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacion.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -146,24 +175,18 @@ module.exports = Backbone.View.extend({
 },{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
 var $ = require('jquery'),
     _ = require('underscore'),
-    q = require('q');
+    Q = require('q');
 
 module.exports = (function  () {
     return {
-        loadTemplate : function (url){
-            $.ajax({
-                url: '/pruebas/header',
-                dataType: 'html',
-                success: function(data){
-                    deferred.resolve(data);
-                },
-                error: function(error){
-                    deferred.reject('<p>Algo ha salido mal</p>');
-                },
-                always: function(data){
-                     $.trigger("TEMPLATE_LOADED", [url]);
-                }
+        getJSON : function(data){
+            url = '/buscar/';
+            var deferred = Q.defer()
+            $.get(url, data, function(jsonResponse){
+                var objectResponse = JSON.parse(jsonResponse);
+                deferred.resolve(objectResponse);
             });
+            return deferred.promise;
         },
         getLocalStorage : function(key){
             item = localStorage.getItem(key);

@@ -3,6 +3,7 @@ var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
     Investigaciones = require('./backbone/collections/investigaciones'),
+    HeaderView = require('./backbone/views/header'), 
     PiezaView = require('./backbone/views/piezaDetail'),
     InvestigacionesListView = require('./backbone/views/investigaciones'),
     utilidades = require('./utilidades');
@@ -15,7 +16,8 @@ function configuraciones() {
 	window.state = 'piezaDetail';
     return {
         cargarFuncionalidad: function (){
-            var investigacionesList = new InvestigacionesListView({
+            var header = new HeaderView({ config: 0 }),
+                investigacionesList = new InvestigacionesListView({
                     el: $('#Investigaciones-content') 
                 }, investigacionesCollection);
             this.getPieza();
@@ -49,7 +51,7 @@ $(function(){
     var configuracionInicial = configuraciones();
     configuracionInicial.cargarFuncionalidad();
 });
-},{"./backbone/collections/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js","./backbone/views/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigaciones.js","./backbone/views/piezaDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezaDetail.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js":[function(require,module,exports){
+},{"./backbone/collections/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/investigaciones":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigaciones.js","./backbone/views/piezaDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezaDetail.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/investigaciones.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     Investigacion     = require('../models/investigacion');
 
@@ -60,7 +62,39 @@ module.exports = Backbone.Collection.extend({
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacion.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js":[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+
+module.exports = Backbone.View.extend({
+  el: $('#Header'),
+
+  events: {
+    'click #Header-buttons-menuButton': 'displayMenu',
+    'click #Header-buttons-searchButton': 'displaySearchBox'
+  },
+  initialize: function (options) {
+    this.options = options || {};
+    if(this.options.config === 1){
+      this.$el.addClass('Header--searchHide')      
+    }
+    //this.listenTo(this.model, "change", this.render, this);
+  },
+
+  render: function () {
+    return this;
+  },
+  displayMenu: function (){
+    this.$el.removeClass('Header--searchActive');
+  	this.$el.toggleClass('Header--menuActive');
+  },
+  displaySearchBox: function (){
+    this.$el.removeClass('Header--menuActive');
+    this.$el.toggleClass('Header--searchActive');
+  },
+});
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacion.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),

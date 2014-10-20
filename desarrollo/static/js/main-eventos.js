@@ -1,37 +1,23 @@
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
-	Piezas = require('./backbone/collections/piezas'),
 	Eventos = require('./backbone/collections/eventos'),
     HeaderView = require('./backbone/views/header'),
-	PiezaView = require('./backbone/views/pieza'),
-	PiezasListView = require('./backbone/views/piezas'),
 	EventosListView = require('./backbone/views/eventos'),
     utilidades = require('./utilidades');
 	Backbone.$ = $;
-
 function configuraciones() {
-	var piezas = new Piezas(),
-        eventosCollection = new Eventos();
+	var eventosCollection = new Eventos();
 	window.state = 'index';
     return {
     	cargarFuncionalidad: function (){
-    		var header = new HeaderView({ config: 1 }),
-    			piezasList = new PiezasListView({
-    				el: $('#Piezas-content'),
-    			}, piezas),
+    		var header = new HeaderView({ config: 0 }),
                 eventosList = new EventosListView({
                     el: $('#Eventos-content')
                 }, eventosCollection);
-            this.getEventos();
+            this.getEventos();   
     	},
-    	cargarPiezas: function(){
-    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
-    		_.each(piezasGuardadas, function(pieza){
-    			piezas.add(pieza);
-    		});
-    	},
-        getEventos: function(){
+    	getEventos: function(){
             /*var dataEventos = {
                 recurso:'eventos'
             };
@@ -40,15 +26,15 @@ function configuraciones() {
                     eventosCollection.add(evento);
                 });
             });*/
+			debugger;
             for(var i=0; i < 3; i++){
-                eventosCollection.add({titulo: 'Evento '+i})
+                eventosCollection.add({titulo: 'Evento '+i, tipo: 'EventoCard'})
             };
         }
     }
 };
-
 $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
-	configuracionInicial.cargarPiezas();
+	console.log('Start app')
 });

@@ -2,6 +2,7 @@ var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
     Piezas = require('./backbone/collections/piezas'),
+    HeaderView = require('./backbone/views/header'), 
     InvestigacionView = require('./backbone/views/investigacionDetail'),
     PiezasListView = require('./backbone/views/piezas'),
 	utilidades = require('./utilidades');
@@ -14,7 +15,8 @@ function configuraciones() {
 	window.state = 'investigacionDetail';
     return {
         cargarFuncionalidad: function(){
-            var piezasList = new PiezasListView({
+            var header = new HeaderView({ config: 0 }),
+                piezasList = new PiezasListView({
                     el: $('#Piezas-content'),
                 }, piezasCollection);
             this.getInvestigacion();

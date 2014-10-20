@@ -27,7 +27,6 @@ module.exports = Backbone.View.extend({
     var pieza = this.model.toJSON();
     var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
     var piezasActualizadas = [];
-    debugger;
     if(pieza.almacenado===true){
       piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
       utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)

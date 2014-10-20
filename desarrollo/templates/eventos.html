@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Investigacion</title>
+	<title>Eventos en el museo</title>
 	<link rel="stylesheet" href='{%static "css/main-eventos.css" %}'>
 </head>
 <body>
@@ -11,15 +11,15 @@
 	<section class="Eventos">
 		<div class="Eventos-container">
 			<h4 class="u-mensajeResultados">Listado de proximos eventos</h4>
-			<section class="Eventos-content">
-				{% include "partials/evento-card.html" %}
-				{% include "partials/evento-card.html" %}
-				{% include "partials/evento-card.html" %}
-				{% include "partials/evento-card.html" %}
+			<section id="Eventos-content" class="Eventos-content">
+				
 			</section>
 		</div>
 	</section>
+	<script id="evento-template" type = "text/template">
+		{% include "partials/evento-card.html" %}
+	</script>
 	{% include "partials/footer.html" %}
-	<script src="../static/js/main-index.js"></script>
+	<script src='{%static "js/main-eventos.js" %}'></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
     Piezas = require('./backbone/collections/piezas'),
+    HeaderView = require('./backbone/views/header'), 
     InvestigacionView = require('./backbone/views/investigacionDetail'),
     PiezasListView = require('./backbone/views/piezas'),
 	utilidades = require('./utilidades');
@@ -15,7 +16,8 @@ function configuraciones() {
 	window.state = 'investigacionDetail';
     return {
         cargarFuncionalidad: function(){
-            var piezasList = new PiezasListView({
+            var header = new HeaderView({ config: 0 }),
+                piezasList = new PiezasListView({
                     el: $('#Piezas-content'),
                 }, piezasCollection);
             this.getInvestigacion();
@@ -50,7 +52,7 @@ $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
 });
-},{"./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/investigacionDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacionDetail.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js":[function(require,module,exports){
+},{"./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/investigacionDetail":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacionDetail.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     Pieza     = require('../models/pieza');
 
@@ -61,7 +63,39 @@ module.exports = Backbone.Collection.extend({
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacionDetail.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js":[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+
+module.exports = Backbone.View.extend({
+  el: $('#Header'),
+
+  events: {
+    'click #Header-buttons-menuButton': 'displayMenu',
+    'click #Header-buttons-searchButton': 'displaySearchBox'
+  },
+  initialize: function (options) {
+    this.options = options || {};
+    if(this.options.config === 1){
+      this.$el.addClass('Header--searchHide')      
+    }
+    //this.listenTo(this.model, "change", this.render, this);
+  },
+
+  render: function () {
+    return this;
+  },
+  displayMenu: function (){
+    this.$el.removeClass('Header--searchActive');
+  	this.$el.toggleClass('Header--menuActive');
+  },
+  displaySearchBox: function (){
+    this.$el.removeClass('Header--menuActive');
+    this.$el.toggleClass('Header--searchActive');
+  },
+});
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/investigacionDetail.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -113,7 +147,6 @@ module.exports = Backbone.View.extend({
     var pieza = this.model.toJSON();
     var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
     var piezasActualizadas = [];
-    debugger;
     if(pieza.almacenado===true){
       piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
       utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)

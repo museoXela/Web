@@ -40,5 +40,4 @@ function configuraciones() {
 $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
-	console.log("Start App");
 });

@@ -30,6 +30,12 @@ module.exports = (function  () {
             if(indice >= 0)
                 arreglo.splice(indice,1);
             return arreglo;
+        },
+        getParameterByName : function (name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
     }
 })();

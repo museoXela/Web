@@ -1,144 +1,59 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./desarrollo/static/js/main-index.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./desarrollo/static/js/main-about.js":[function(require,module,exports){
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
-	Piezas = require('./backbone/collections/piezas'),
-	Eventos = require('./backbone/collections/eventos'),
-    HeaderView = require('./backbone/views/header'),
-	PiezaView = require('./backbone/views/pieza'),
-	PiezasListView = require('./backbone/views/piezas'),
-	EventosListView = require('./backbone/views/eventos'),
-    utilidades = require('./utilidades');
+	Voluntarios = require('./backbone/collections/voluntarios'),
+	HeaderView = require('./backbone/views/header'),
+	VoluntariosView = require('./backbone/views/voluntario'),
+	VoluntariosListView = require('./backbone/views/voluntarios'),
+	utilidades = require('./utilidades');
 	Backbone.$ = $;
-
 function configuraciones() {
-	var piezas = new Piezas(),
-        eventosCollection = new Eventos();
-	window.state = 'index';
+	var voluntariosCollection = new Voluntarios();
+	window.state = 'about';
     return {
     	cargarFuncionalidad: function (){
-    		var header = new HeaderView({ config: 1 }),
-    			piezasList = new PiezasListView({
-    				el: $('#Piezas-content'),
-    			}, piezas),
-                eventosList = new EventosListView({
-                    el: $('#Eventos-content')
-                }, eventosCollection);
-            this.getEventos();
+    		var header = new HeaderView({ config: 0 }),
+    			voluntariosList = new VoluntariosListView({
+    				el: $('#Voluntarios-content'),
+    			}, voluntariosCollection);
+    		this.getVoluntarios();
     	},
-    	cargarPiezas: function(){
-    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
-    		_.each(piezasGuardadas, function(pieza){
-    			piezas.add(pieza);
-    		});
-    	},
-        getEventos: function(){
-            var dataEventos = {
-                recurso:'eventos',
+    	getVoluntarios: function(){
+            var dataVoluntarios = {
+                recurso:'voluntarios',
             };
-            utilidades.getJSON(dataEventos).then(function(data){
+            utilidades.getJSON(dataVoluntarios).then(function(data){
                 if(data.length == 0){
-                    $('#Eventos-content').append('<p>No hay eventos programados para las proximas fechas</p>');
+                    $('#Voluntarios-content').append('<p>No se han encontrado colaboradores.</p>');
                 }else{
-                    _.each(data, function(evento){
-                        eventosCollection.add(evento);
+                    _.each(data, function(voluntario){
+                        voluntario.tipo = 'Voluntario--Proyecto'
+                        voluntariosCollection.add(voluntario);
                     });    
                 }
                 
-            });/*
-            for(var i=0; i < 3; i++){
-                eventosCollection.add({titulo: 'Evento '+i})
-            };*/
+            });
         }
     }
-};
+}
 
 $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
-	configuracionInicial.cargarPiezas();
 });
-},{"./backbone/collections/eventos":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/eventos.js","./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/eventos":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/eventos.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/eventos.js":[function(require,module,exports){
+},{"./backbone/collections/voluntarios":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/voluntarios.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/voluntario":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/voluntario.js","./backbone/views/voluntarios":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/voluntarios.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/voluntarios.js":[function(require,module,exports){
 var Backbone = require('backbone'),
-    Evento     = require('../models/evento');
+    Voluntario     = require('../models/voluntario');
 
 module.exports = Backbone.Collection.extend({
-  model: Evento
+  model: Voluntario
 });
-},{"../models/evento":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/evento.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    Pieza     = require('../models/pieza');
-
-module.exports = Backbone.Collection.extend({
-  model: Pieza
-});
-},{"../models/pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/pieza.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/evento.js":[function(require,module,exports){
+},{"../models/voluntario":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/voluntario.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/voluntario.js":[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/models/pieza.js":[function(require,module,exports){
-var Backbone = require('backbone');
-
-module.exports = Backbone.Model.extend({});
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/evento.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    swig = require('swig'),
-    utilidades = require('../../utilidades');
-
-module.exports = Backbone.View.extend({
-  tagName: 'article',
-  className: 'Evento',
-
-  events: {
-  },
-  template: swig.compile($("#evento-template").html()),
-  initialize: function () {
-    //this.listenTo(this.model, "change", this.render, this);
-  },
-
-  render: function () {
-    var evento = this.model.toJSON();
-    if(evento.tipo === 'EventoCard'){
-      this.$el.removeClass('Evento');
-      this.$el.addClass('EventoCard');
-    }
-    this.$el.html(this.template(evento));
-    return this;
-  }
-});
-},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/eventos.js":[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    EventoView = require('./evento');
-
-module.exports = Backbone.View.extend({
-  events: {
-  },
-  initialize: function (options, collection) {
-    this.collection = collection || {};
-    this.options = options || {};
-    this.el = this.options.el;
-    this.listenTo(this.collection, "add", this.addOne, this);
-    this.listenTo(this.collection, "reset", this.render, this);
-  },
-
-  render: function () {
-    this.$el.empty();
-    this.addAll();
-  },
-
-  addOne: function (evento) {
-    var eventoView = new EventoView({ model: evento, collection: this.collection });
-    this.$el.append(eventoView.render().el);
-  },
-  addAll: function () {
-    this.collection.forEach(this.addOne, this);
-  }
-});
-},{"./evento":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/evento.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore');
@@ -170,7 +85,7 @@ module.exports = Backbone.View.extend({
     this.$el.toggleClass('Header--searchActive');
   },
 });
-},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js":[function(require,module,exports){
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/voluntario.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -179,48 +94,33 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.View.extend({
   tagName: 'article',
-  className: 'Pieza',
+  className: 'Voluntario',
 
   events: {
-    'click .Pieza-actions-iconHeart': 'toggleSave',
   },
-  template: swig.compile($("#pieza-template").html()),
+  template: swig.compile($("#voluntario-template").html()),
   initialize: function () {
     //this.listenTo(this.model, "change", this.render, this);
   },
 
   render: function () {
-    var pieza = this.model.toJSON();
-    if(pieza.almacenado===true)
-      this.$el.addClass('Pieza--saved');
-    this.$el.html(this.template(pieza));
+    var voluntario = this.model.toJSON();
+    if(voluntario.tipo === 'Voluntario--Proyecto'){
+      this.$el.addClass('Voluntario--Proyecto');
+    }
+    this.$el.html(this.template(voluntario));
     return this;
-  },
-  toggleSave: function(event) {
-    var pieza = this.model.toJSON();
-    var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
-    var piezasActualizadas = [];
-    if(pieza.almacenado===true){
-      piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
-      utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)
-      if(window.state === 'index'){
-        this.collection.remove(this.model);
-        this.$el.remove();
-      }
-      pieza.almacenado = false;
-    }else{
-      pieza.almacenado = true;
-    };
-    this.model.set(pieza);
   }
 });
-},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js":[function(require,module,exports){
+},{"../../utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","swig":"/home/jescalante/Documentos/Github/Web/node_modules/swig/index.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/voluntarios.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
-    PiezaView = require('./pieza');
+    VoluntarioView = require('./voluntario');
 
 module.exports = Backbone.View.extend({
+  events: {
+  },
   initialize: function (options, collection) {
     this.collection = collection || {};
     this.options = options || {};
@@ -234,15 +134,15 @@ module.exports = Backbone.View.extend({
     this.addAll();
   },
 
-  addOne: function (pieza) {
-    var piezaView = new PiezaView({ model: pieza, collection: this.collection });
-    this.$el.append(piezaView.render().el);
+  addOne: function (voluntario) {
+    var voluntarioView = new VoluntarioView({ model: voluntario, collection: this.collection });
+    this.$el.append(voluntarioView.render().el);
   },
   addAll: function () {
     this.collection.forEach(this.addOne, this);
   }
 });
-},{"./pieza":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
+},{"./voluntario":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/voluntario.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js":[function(require,module,exports){
 var $ = require('jquery'),
     _ = require('underscore'),
     Q = require('q');
@@ -275,6 +175,12 @@ module.exports = (function  () {
             if(indice >= 0)
                 arreglo.splice(indice,1);
             return arreglo;
+        },
+        getParameterByName : function (name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
     }
 })();
@@ -20078,4 +19984,4 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}]},{},["./desarrollo/static/js/main-index.js"]);
+},{}]},{},["./desarrollo/static/js/main-about.js"]);

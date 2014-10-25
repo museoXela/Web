@@ -33,17 +33,22 @@ function configuraciones() {
     		});
     	},
         getEventos: function(){
-            /*var dataEventos = {
-                recurso:'eventos'
+            var dataEventos = {
+                recurso:'eventos',
             };
             utilidades.getJSON(dataEventos).then(function(data){
-                _.each(data, function(evento){
-                    eventosCollection.add(evento);
-                });
-            });*/
+                if(data.length == 0){
+                    $('#Eventos-content').append('<p>No hay eventos programados para las proximas fechas</p>');
+                }else{
+                    _.each(data, function(evento){
+                        eventosCollection.add(evento);
+                    });    
+                }
+                
+            });/*
             for(var i=0; i < 3; i++){
                 eventosCollection.add({titulo: 'Evento '+i})
-            };
+            };*/
         }
     }
 };
@@ -95,6 +100,10 @@ module.exports = Backbone.View.extend({
 
   render: function () {
     var evento = this.model.toJSON();
+    if(evento.tipo === 'EventoCard'){
+      this.$el.removeClass('Evento');
+      this.$el.addClass('EventoCard');
+    }
     this.$el.html(this.template(evento));
     return this;
   }
@@ -191,7 +200,6 @@ module.exports = Backbone.View.extend({
     var pieza = this.model.toJSON();
     var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
     var piezasActualizadas = [];
-    debugger;
     if(pieza.almacenado===true){
       piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
       utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)

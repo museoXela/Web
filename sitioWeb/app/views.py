@@ -6,25 +6,27 @@ import requests
 # Create your views here.
 def search_view(request):
     recurso = request.GET['recurso'] or ''
-    url = 'http://104.131.99.190/v1/piezas/exhibicion/'
+    url = 'http://104.131.99.190/api/v1/piezas/exhibicion/'
     resultado = {}
     r = ''
     if recurso == 'piezaDetail':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/v1/piezas/%s' % codigoPieza.replace('-','.')
+        url = 'http://104.131.99.190/api/v1/piezas/%s' % codigoPieza.replace('-','.')
         #r = requests.get(url)
     if recurso == 'investigacionDetail':
         codigoInvestigacion = request.GET['codigoInvestigacion']
-        url = 'http://104.131.99.190/v1/investigaciones/%s' % codigoInvestigacion
+        url = 'http://104.131.99.190/api/v1/investigaciones/%s' % codigoInvestigacion
         #r = requests.get(url)
     if recurso == 'piezaInvestigaciones':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/v1/investigaciones/'
+        url = 'http://104.131.99.190/api/v1/investigaciones/'
 
     if recurso == 'investigacionPiezas':
         codigoInvestigacion = request.GET['codigoInvestigacion']
-        url = 'http://104.131.99.190/v1/piezas/'
-    
+        url = 'http://104.131.99.190/api/v1/piezas/'
+    if recurso == 'eventos':
+        url = 'http://104.131.99.190/api/v1/eventos'
+        
     headers = {'Authorization': 'oauth ea538fb5baced25bb5fa21e49310db0344139742'}
     r = requests.get(url, headers=headers)
 

@@ -18,18 +18,19 @@ function configuraciones() {
             this.getEventos();   
     	},
     	getEventos: function(){
-            /*var dataEventos = {
+            var dataEventos = {
                 recurso:'eventos'
             };
             utilidades.getJSON(dataEventos).then(function(data){
                 _.each(data, function(evento){
+                    evento.tipo = 'EventoCard'
                     eventosCollection.add(evento);
                 });
-            });*/
+            });/*
 			debugger;
             for(var i=0; i < 3; i++){
                 eventosCollection.add({titulo: 'Evento '+i, tipo: 'EventoCard'})
-            };
+            };*/
         }
     }
 };

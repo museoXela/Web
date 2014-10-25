@@ -1,1 +1,1 @@
-{% load staticfiles %}<section class=Evento-logo><a href=#><img src="{%static "img/SalasPlanos-08_ampliacion.jpg" %}" alt=Pieza height=40 width=40></a></section>{% verbatim %}<section class=Evento-content><a href=#>{{ titulo }}</a><p>Sala 3 - 17:45 del 29/10/2014</p></section>{% endverbatim %}
+{% load staticfiles %} {% verbatim %}<section class=Evento-logo><a href=#><img src="{{ fotoSala }}" alt=Pieza height=40 width=40></a></section><section class=Evento-content><a href=#>{{ nombre }}</a><p>Sala: {{ sala }} - Fecha: {{ fecha }}</p></section>{% endverbatim %}

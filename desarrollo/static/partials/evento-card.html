@@ -1,18 +1,22 @@
 {% load staticfiles %}
 <!--<article class="Pieza">-->
+{% verbatim %}
 <section class="EventoCard-logo">
 	<a href="#">
-		<img src='{%static "img/SalasPlanos-08_ampliacion.jpg" %}' alt="Pieza"/>
+		<img src='{{ fotoSala }}' alt="Pieza"/>
 	</a>	
 </section>
 <section class="EventoCard-content">
-	<a href="#" class="u-enlaces EventoCard-content-title">Exposición Morph Ullu Ixchel presenta "Linaje"</a>
+	<a href="#" class="u-enlaces EventoCard-content-title">{{ nombre }}</a>
 	<section class="EventoCard-content-info">
-		<p><span class="icon-location">&nbsp;Sala 3</span>
-		<span class="icon-calendar">&nbsp;17:45 - 23/10/2014</span></p>
+		<p><span class="icon-location">&nbsp;Sala: {{ sala }}</span>
+		<span class="icon-calendar">&nbsp;{{ fecha }}</span></p>
 	</section>
-	<p class="EventoCard-content-description">Aprende todo lo que necesitas saber y todo lo que sepuede lograr con el programa número uno de post producción fotografica. 140caracteresmax</p>
+	<p class="EventoCard-content-description">{{ descripcion }}</p>
+	{% if afiche == null %}
 	<section class="EventoCard-content-afiche">
-		<a class="u-enlaces" href="#">Afiche - Exposición Morph Ullu Ixchel presenta "Linaje"</a>
+		<a class="u-enlaces" href="{{ afiche }}">Afiche - {{ nombre }}</a>
 	</section>
+	{% endif %}
 </section>
+{% endverbatim %}

@@ -31,12 +31,8 @@
 	<section class="Voluntarios">
 		<div class="Voluntarios-container">
 			<h4 class="u-mensajeResultados">Voluntarios</h4>
-			<section class="Voluntarios-content">
-				{% include "partials/voluntario.html" %}
-				{% include "partials/voluntario.html" %}
-				{% include "partials/voluntario.html" %}
-				{% include "partials/voluntario.html" %}
-				{% include "partials/voluntario.html" %}
+			<section id="Voluntarios-content" class="Voluntarios-content">
+				
 			</section>
 		</div>
 	</section>
@@ -60,6 +56,9 @@
 		</div>
 	</section>
 	{% include "partials/footer.html" %}
-	<script src="../static/js/main-index.js"></script>
+	<script id="voluntario-template" type = "text/template">
+		{% include "partials/voluntario.html" %}
+	</script>
+	<script src="../static/js/main-about.js"></script>
 </body>
 </html>

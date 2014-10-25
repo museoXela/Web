@@ -20,13 +20,13 @@ function browserifyShare(){
     bundleShare(b);
   });
   
-  b.add('./desarrollo/static/js/main-eventos.js');
+  b.add('./desarrollo/static/js/main-about.js');
   bundleShare(b);
 }
 
 function bundleShare(b) {
   b.bundle()
-    .pipe(source('main-eventos.js'))
+    .pipe(source('main-about.js'))
     .pipe(gulp.dest('./sitioWeb/app/static/js'));
 }
 
@@ -49,7 +49,7 @@ gulp.task('partials', function (){
 });
 
 gulp.task('stylus', function () {
-  var cssSrc = './desarrollo/static/stylus/main-eventos.styl',
+  var cssSrc = './desarrollo/static/stylus/main-about.styl',
       cssDst = './sitioWeb/app/static/css';
 
   gulp.src(cssSrc)

@@ -27,7 +27,7 @@ function configuraciones() {
                     $('#Voluntarios-content').append('<p>No se han encontrado colaboradores.</p>');
                 }else{
                     _.each(data, function(voluntario){
-                        voluntario.tipo = 'Voluntario--Proyecto'
+                        //voluntario.tipo = 'Voluntario--Proyecto'
                         voluntariosCollection.add(voluntario);
                     });    
                 }

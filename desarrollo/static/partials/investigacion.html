@@ -1,13 +1,12 @@
 {% load staticfiles %}
 {% verbatim %}
 <section class="Investigacion-content">
-	<a href="#" class="u-enlaces">{{ titulo }}</a>
+	<a href="/investigaciones/{{ id }}" class="u-enlaces">{{ titulo }}</a>
 	<p>{{ resumen }}</p>
 </section>
-{% endverbatim %}
 <section class="Investigacion-info">
 	<a href="#" class="u-enlaces">
-		<img src='{%static "img/no-user.jpg" %}' alt="Museo de historia natural" height="24" width="24">{% verbatim %}<p>&nbsp;Jorge Escalante</p></a>
+		<img src='{{ userFoto }}' alt="Museo de historia natural" height="24" width="24"><p>&nbsp;{{ editor }}</p></a>
 	<p>{{ fecha|date('d-m-Y')}}</p>
 </section>
 {% endverbatim %}

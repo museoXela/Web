@@ -11,22 +11,22 @@ def search_view(request):
     r = ''
     if recurso == 'piezaDetail':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/api/v1/piezas/%s' % codigoPieza.replace('-','.')
+        url = 'http://104.131.99.190/web/v1/exhibicion/%s' % codigoPieza.replace('-','.')
         #r = requests.get(url)
     if recurso == 'investigacionDetail':
         codigoInvestigacion = request.GET['codigoInvestigacion']
-        url = 'http://104.131.99.190/api/v1/investigaciones/%s' % codigoInvestigacion
+        url = 'http://104.131.99.190/web/v1/investigaciones/%s' % codigoInvestigacion
         #r = requests.get(url)
     if recurso == 'piezaInvestigaciones':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/api/v1/investigaciones/'    
+        url = 'http://104.131.99.190/web/v1/exhibicion/%s/investigaciones' % codigoPieza.replace('-','.')    
     if recurso == 'investigacionPiezas':
         codigoInvestigacion = request.GET['codigoInvestigacion']
-        url = 'http://104.131.99.190/api/v1/piezas/'
+        url = 'http://104.131.99.190/web/v1/investigaciones/%s/piezas' % codigoInvestigacion
     if recurso == 'eventos':
-        url = 'http://104.131.99.190/api/v1/eventos'
+        url = 'http://104.131.99.190/web/v1/eventos'
     if recurso == 'voluntarios':
-        url = 'http://104.131.99.190/api/v1/usuarios'        
+        url = 'http://104.131.99.190/web/v1/voluntarios'        
         
     headers = {'Authorization': 'oauth ea538fb5baced25bb5fa21e49310db0344139742'}
     r = requests.get(url, headers=headers)

@@ -25,9 +25,7 @@
 				<p class="u-enlaces">{{ titulo }}</p>
 				<section class="Investigacion-info">
 					<a href="#" class="u-enlaces">
-						{% endverbatim %}
-						<img src='{%static "img/no-user.jpg" %}' alt="Museo de historia natural" height="24" width="24"><p>&nbsp;Jorge Escalante</p></a>
-					{% verbatim %}
+						<img src='{{ userFoto }}' alt="Museo de historia natural" height="24" width="24"><p>&nbsp;{{ editor }}</p></a>
 					<p>{{ fecha|date('d-m-Y')}}</p>
 				</section>
 			</section>
@@ -37,9 +35,9 @@
 				<section class="InvestigacionDetail-content-referencias">
 					<p>Referencias</p>
 					<ul>
-						<li><a href="#" class="u-enlaces referencia">http://www.museoguatemala.com/2014/10/07/investigacion</a></li>
-						<li><a href="#" class="u-enlaces referencia">http://www.museoguatemala.com/2014/10/07/investigacion</a></li>
-						<li><a href="#" class="u-enlaces referencia">http://www.museoguatemala.com/2014/10/07/investigacion</a></li>	
+						{% for link in links %}
+						<li><a href="{{ link.link }}" class="u-enlaces referencia">{{ link.link }}</a></li>
+						{% endfor %}	
 					</ul>
 				</section>
 			</section>

@@ -8,14 +8,6 @@
 </head>
 <body>
 	{% include "partials/header.html" %}
-	<section class="Categoria">
-		<div class="Categoria-container">
-			<a href="#" class="u-enlaces">Colección prehispanica</a><span class="icon-arrow-right"></span>
-			<a href="#" class="u-enlaces">Cerámica</a><span class="icon-arrow-right"></span>
-			<a href="#" class="u-enlaces">Figurillas</a>
-		</div>	
-	</section>
-	
 	<section class="Investigaciones">
 		<div class="Investigaciones-container">
 			<h4 class="u-mensajeResultados">Investigaciones</h4>
@@ -26,25 +18,32 @@
 	</section>
 	{% include "partials/footer.html" %}
 	<script id="PiezaDetail-template" type = "text/template">
-		<div class="PiezaDetail-container">
-			{% verbatim %}
-			<section class="PiezaDetail-header">
-				<h5>{{nombre}}</h5>
-				<section class="PiezaDetail-header-info">
-					<p><span class="icon-earth">&nbsp;{{procedencia}}</span>
-					<span class="icon-dating">&nbsp;{{fechamiento}}</span></p>
+		{% verbatim %}
+		<section class="Categoria">
+			<div class="Categoria-container">
+				<a href="#" class="u-enlaces">{{ coleccion }}</a><span class="icon-arrow-right"></span>
+				<a href="#" class="u-enlaces">{{ categoria }}</a><span class="icon-arrow-right"></span>
+				<a href="#" class="u-enlaces">{{ clasificacion }}</a>
+			</div>	
+		</section>
+		<section class="PiezaDetail">
+			<div class="PiezaDetail-container">
+				<section class="PiezaDetail-header">
+					<h5>{{ nombre }}</h5>
+					<section class="PiezaDetail-header-info">
+						<p><span class="icon-earth">&nbsp;{{ pais }}</span>
+						<span class="icon-dating">&nbsp;{{ fechamiento }}</span></p>
+					</section>
 				</section>
-			</section>
-			{% endverbatim %}
-			<section class="PiezaDetail-galeria">
-				<img class="PiezaDetail-galeria-perfil" src='{%static "img/olmeca.jpg" %}' alt="pieza">
-			</section>
-			{% verbatim %}
-			<section class="PiezaDetail-content">
-				<p>{{descripcion}}</p>
-			</section>
-			{% endverbatim %}
-		</div>
+				<section class="PiezaDetail-galeria">
+					<img class="PiezaDetail-galeria-perfil" src='{{ fotografia }}' alt="pieza">
+				</section>
+				<section class="PiezaDetail-content">
+					<p>{{ descripcion }}</p>
+				</section>
+			</div>
+		</section>
+		{% endverbatim %}
 	</script>
 	<script id="investigacion-template" type = "text/template">
 		{% include "partials/investigacion.html" %}

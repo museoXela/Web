@@ -6,7 +6,7 @@ from views import search_view
 
 urlpatterns = patterns('',
     (r'^$', TemplateView.as_view(template_name="index.html")),
-    (r'^piezas/[Mm]-\d+-\d+-\d+-\d+/$', TemplateView.as_view(template_name="pieza.html")),
+    (r'^piezas/[Mm][.]\d+[.]\d+[.]\d+[.]\d+/$', TemplateView.as_view(template_name="pieza.html")),
     (r'^investigaciones/\d+/$', TemplateView.as_view(template_name="investigacion.html")),
     (r'^about/$', TemplateView.as_view(template_name="about.html")),
     (r'^busqueda/$', TemplateView.as_view(template_name="busqueda.html")),

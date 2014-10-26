@@ -11,7 +11,7 @@ def search_view(request):
     r = ''
     if recurso == 'piezaDetail':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/web/v1/exhibicion/%s' % codigoPieza.replace('-','.')
+        url = 'http://104.131.99.190/web/v1/exhibicion/%s' % codigoPieza
         #r = requests.get(url)
     if recurso == 'investigacionDetail':
         codigoInvestigacion = request.GET['codigoInvestigacion']
@@ -19,7 +19,7 @@ def search_view(request):
         #r = requests.get(url)
     if recurso == 'piezaInvestigaciones':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/web/v1/exhibicion/%s/investigaciones' % codigoPieza.replace('-','.')    
+        url = 'http://104.131.99.190/web/v1/exhibicion/%s/investigaciones' % codigoPieza   
     if recurso == 'investigacionPiezas':
         codigoInvestigacion = request.GET['codigoInvestigacion']
         url = 'http://104.131.99.190/web/v1/investigaciones/%s/piezas' % codigoInvestigacion

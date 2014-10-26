@@ -6,7 +6,6 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.View.extend({
   tagName: 'section',
-  className: 'PiezaDetail',
 
   events: {
     'click .Pieza-actions-iconHeart': 'toggleSave',

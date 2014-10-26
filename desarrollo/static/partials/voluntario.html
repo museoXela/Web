@@ -1,16 +1,17 @@
-{% load staticfiles %}
+{% verbatim %}
 <section class="Voluntario-datos">
 	<figure>
-		<img src='{%static "img/zz227d0f93.jpg" %}' alt="Museo Víctor Salvador de León Toledo">
+		<img src='{{ fotografia }}' alt="Museo Víctor Salvador de León Toledo">
 	</figure>
-	<h5>Mr. Fox</h5>
-	<p>Las actividades y oficios que desempeña la mujer en la época prehispánica, desde el año 400 a.C. hasta la Conquista española (1521) así como los hábitos.</p>
+	<h5>{{ nombre }}, {{ apellido }}</h5>
+	<p>{{ biografia }}</p>
 </section>
 <section class="Voluntario-investigaciones">
 	<p>Investigaciones</p>
 	<ul>
-		<li><a href="#" class="u-enlaces">Revela exposición vida cotidiana de la mujer prehispánica</a></li>
-		<li><a href="#" class="u-enlaces">Revela exposición vida cotidiana</a></li>
-		<li><a href="#" class="u-enlaces">La mujer prehispánica</a></li>
+		{% for investigacion in investigaciones %}
+		<li><a href="/investigaciones/{{ investigacion.id }}" class="u-enlaces">{{ investigacion.titulo }}</a></li>
+		{% endfor %}
 	</ul>
 </section>
+{% endverbatim %}

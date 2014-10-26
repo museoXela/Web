@@ -9,8 +9,8 @@
 <section class="EventoCard-content">
 	<a href="#" class="u-enlaces EventoCard-content-title">{{ nombre }}</a>
 	<section class="EventoCard-content-info">
-		<p><span class="icon-location">&nbsp;Sala: {{ sala }}</span>
-		<span class="icon-calendar">&nbsp;{{ fecha }}</span></p>
+		<p><span class="icon-location">&nbsp;Lugar: {{ sala }}</span>
+		<span class="icon-calendar">&nbsp;Fecha: {{ fecha |date('d-m-Y')}}</span></p>
 	</section>
 	<p class="EventoCard-content-description">{{ descripcion }}</p>
 	{% if afiche == null %}

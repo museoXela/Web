@@ -4,11 +4,12 @@ var $ = require('jquery'),
 
 module.exports = (function  () {
     return {
-        getJSON : function(data){
+        getJSON : function(data, self){
             url = '/buscar/';
             var deferred = Q.defer()
             $.get(url, data, function(jsonResponse){
                 var objectResponse = JSON.parse(jsonResponse);
+                objectResponse.self = self;
                 deferred.resolve(objectResponse);
             });
             return deferred.promise;
@@ -36,6 +37,12 @@ module.exports = (function  () {
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
                 results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        },
+        getURL : function (url, extraParameters) {
+            var extraParametersEncoded = $.param(extraParameters);
+            var seperator = url.indexOf('?') == -1 ? "?" : "&";
+
+            return(url + seperator + extraParametersEncoded);
         }
     }
 })();

@@ -26,7 +26,16 @@ def search_view(request):
     if recurso == 'eventos':
         url = 'http://104.131.99.190/web/v1/eventos'
     if recurso == 'voluntarios':
-        url = 'http://104.131.99.190/web/v1/voluntarios'        
+        url = 'http://104.131.99.190/web/v1/voluntarios'
+    if recurso == 'search-investigaciones':
+        keyword = request.GET['keyword']
+        url = 'http://104.131.99.190/web/v1/investigaciones/buscar/?keyword=%s' %  keyword
+    if recurso == 'search-piezas':
+        keyword = request.GET['keyword']
+        url = 'http://104.131.99.190/web/v1/exhibicion/buscar/?keyword=%s' % keyword
+    if recurso == 'colecciones':
+        url = 'http://104.131.99.190/web/v1/colecciones/'
+
         
     headers = {'Authorization': 'oauth ea538fb5baced25bb5fa21e49310db0344139742'}
     r = requests.get(url, headers=headers)

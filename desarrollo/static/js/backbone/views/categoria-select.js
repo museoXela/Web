@@ -17,23 +17,25 @@ module.exports = Backbone.View.extend({
   render: function () {
     var categoria = this.model.toJSON(),
         atributos = {};
-    
     if(categoria.tipo === 1){
       atributos = {
-        'data-id': categoria.id
+        'data-tipo': categoria.tipo,
+        'data-idColeccion': categoria.idColeccion
       };  
     };
     if(categoria.tipo === 2){
       atributos = {
-        'data-id': categoria.id,
-        'data-idColeccion': categoria.idColeccion
+        'data-tipo': categoria.tipo,
+        'data-idColeccion': categoria.idColeccion,
+        'data-idCategoria': categoria.idCategoria
       };  
     };
     if(categoria.tipo === 3){
       atributos = {
-        'data-id': categoria.id,
+        'data-tipo': categoria.tipo,
         'data-idColeccion': categoria.idColeccion,
-        'data-idCategoria': categoria.data-idCategoria
+        'data-idCategoria': categoria.idCategoria,
+        'data-idClasificacion': categoria.idClasificacion
       };  
     };
     this.$el.attr(atributos);

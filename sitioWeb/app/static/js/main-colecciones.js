@@ -2,6 +2,7 @@
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
+    HeaderView = require('./backbone/views/header'),
 	Piezas = require('./backbone/collections/piezas'),
 	PiezasListView = require('./backbone/views/piezas'),
 	CategoriasCollection = require('./backbone/collections/categorias'),
@@ -14,7 +15,8 @@ function configuraciones() {
 	window.state = 'colecciones';
     return {
     	cargarFuncionalidad: function (){
-    		var categoriasList = new CategoriasListView({
+    		var header = new HeaderView({ config: 0 }),
+    			categoriasList = new CategoriasListView({
                     el: $('#Categorias-content'),
                     el2: $('#selectCategoria')
                 }, categoriasCollection),
@@ -70,6 +72,7 @@ function configuraciones() {
                 }else{
 	                _.each(data, function(coleccion){
 	                	coleccion.tipo = 1;
+	                	coleccion.idColeccion = coleccion.id;
 	                    categoriasCollection.add(coleccion);
 	                });    
                 }
@@ -80,14 +83,20 @@ function configuraciones() {
     			coleccion: id,
     			recurso: 'coleccionCategorias'
     		};
-    		utilidades.getJSON(data).then(function(data){
+    		var self = {
+    			idColecccion: id
+    		}
+    		utilidades.getJSON(data, self).then(function(data){
             	if(data.length == 0){
                     $('#Categorias-content').append('<p>No existen categorias en esta clasificación.</p>');
                 }else{
+                	datos = data.self;
 	                _.each(data, function(coleccion){
 	                	coleccion.tipo = 2;
+	                	coleccion.idColeccion = datos.idColecccion;
+	                	coleccion.idCategoria = coleccion.id;
 	                    categoriasCollection.add(coleccion);
-	                });    
+	                }, datos);    
                 }
             });
     	},
@@ -97,14 +106,22 @@ function configuraciones() {
     			categoria: idCategoria,
     			recurso: 'coleccionesClasificacion'
     		};
-    		utilidades.getJSON(data).then(function(data){
+    		var self = {
+    			idColeccion: idColeccion,
+    			idCategoria: idCategoria
+    		}
+    		utilidades.getJSON(data, self).then(function(data){
             	if(data.length == 0){
                     $('#Categorias-content').append('<p>No existen categorias en esta clasificación.</p>');
                 }else{
+                	datos = data.self;
 	                _.each(data, function(coleccion){
 	                	coleccion.tipo = 3;
+	                	coleccion.idColeccion = datos.idColeccion;
+	                	coleccion.idCategoria = datos.idCategoria;
+	                	coleccion.idClasificacion = coleccion.id;
 	                    categoriasCollection.add(coleccion);
-	                });    
+	                }, datos);    
                 }
             });
     	},
@@ -127,7 +144,7 @@ $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
 });
-},{"./backbone/collections/categorias":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/categorias.js","./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/categorias":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/categorias.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/categorias.js":[function(require,module,exports){
+},{"./backbone/collections/categorias":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/categorias.js","./backbone/collections/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/piezas.js","./backbone/views/categorias":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/categorias.js","./backbone/views/header":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js","./backbone/views/piezas":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/piezas.js","./utilidades":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/utilidades.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/collections/categorias.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     Categoria = require('../models/categoria');
 
@@ -167,23 +184,25 @@ module.exports = Backbone.View.extend({
   render: function () {
     var categoria = this.model.toJSON(),
         atributos = {};
-    
     if(categoria.tipo === 1){
       atributos = {
-        'data-id': categoria.id
+        'data-tipo': categoria.tipo,
+        'data-idColeccion': categoria.idColeccion
       };  
     };
     if(categoria.tipo === 2){
       atributos = {
-        'data-id': categoria.id,
-        'data-idColeccion': categoria.idColeccion
+        'data-tipo': categoria.tipo,
+        'data-idColeccion': categoria.idColeccion,
+        'data-idCategoria': categoria.idCategoria
       };  
     };
     if(categoria.tipo === 3){
       atributos = {
-        'data-id': categoria.id,
+        'data-tipo': categoria.tipo,
         'data-idColeccion': categoria.idColeccion,
-        'data-idCategoria': categoria.data-idCategoria
+        'data-idCategoria': categoria.idCategoria,
+        'data-idClasificacion': categoria.idClasificacion
       };  
     };
     this.$el.attr(atributos);
@@ -223,6 +242,7 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.View.extend({
   events: {
+    'click #selectCategoria' : 'cambiarCategoria',
   },
   initialize: function (options, collection) {
     this.collection = collection || {};
@@ -231,8 +251,28 @@ module.exports = Backbone.View.extend({
     this.el2 = this.options.el2;
     this.listenTo(this.collection, "add", this.addOne, this);
     this.listenTo(this.collection, "reset", this.render, this);
+    $('select').on('change', this.cambiarCategoria);
   },
-
+  cambiarCategoria: function (event){
+    var optionSelected = $("option:selected");
+    var valueSelected = this.value;
+    var tipo = optionSelected.attr("data-tipo");
+    if(tipo === "1"){
+      var idColeccion = optionSelected.attr("data-idColeccion");
+      window.location.href = "/colecciones/?coleccion=" + idColeccion;
+    }
+    if(tipo === "2"){
+      var idColeccion = optionSelected.attr("data-idColeccion"),
+          idCategoria = optionSelected.attr("data-idCategoria");
+      window.location.href = "/colecciones/?coleccion=" + idColeccion + "&categoria="+idCategoria;
+    }
+    if(tipo === "3"){
+      var idColeccion = optionSelected.attr("data-idColeccion"),
+          idCategoria = optionSelected.attr("data-idCategoria"),
+          idClasificacion = optionSelected.attr("data-idClasificacion");
+      window.location.href = "/colecciones/?coleccion=" + idColeccion + "&categoria=" + idCategoria + "&clasificacion=" + idClasificacion;
+    }
+  },
   render: function () {
     this.$el.empty();
     this.addAll();
@@ -248,7 +288,39 @@ module.exports = Backbone.View.extend({
     this.collection.forEach(this.addOne, this);
   }
 });
-},{"./categoria":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/categoria.js","./categoria-select":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/categoria-select.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js":[function(require,module,exports){
+},{"./categoria":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/categoria.js","./categoria-select":"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/categoria-select.js","backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/header.js":[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore');
+
+module.exports = Backbone.View.extend({
+  el: $('#Header'),
+
+  events: {
+    'click #Header-buttons-menuButton': 'displayMenu',
+    'click #Header-buttons-searchButton': 'displaySearchBox'
+  },
+  initialize: function (options) {
+    this.options = options || {};
+    if(this.options.config === 1){
+      this.$el.addClass('Header--searchHide')      
+    }
+    //this.listenTo(this.model, "change", this.render, this);
+  },
+
+  render: function () {
+    return this;
+  },
+  displayMenu: function (){
+    this.$el.removeClass('Header--searchActive');
+  	this.$el.toggleClass('Header--menuActive');
+  },
+  displaySearchBox: function (){
+    this.$el.removeClass('Header--menuActive');
+    this.$el.toggleClass('Header--searchActive');
+  },
+});
+},{"backbone":"/home/jescalante/Documentos/Github/Web/node_modules/backbone/backbone.js","jquery":"/home/jescalante/Documentos/Github/Web/node_modules/jquery/dist/jquery.js","underscore":"/home/jescalante/Documentos/Github/Web/node_modules/underscore/underscore.js"}],"/home/jescalante/Documentos/Github/Web/desarrollo/static/js/backbone/views/pieza.js":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),

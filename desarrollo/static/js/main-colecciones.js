@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
 	$ = require('jquery'),
 	_ = require('underscore'),
+    HeaderView = require('./backbone/views/header'),
 	Piezas = require('./backbone/collections/piezas'),
 	PiezasListView = require('./backbone/views/piezas'),
 	CategoriasCollection = require('./backbone/collections/categorias'),
@@ -13,7 +14,8 @@ function configuraciones() {
 	window.state = 'colecciones';
     return {
     	cargarFuncionalidad: function (){
-    		var categoriasList = new CategoriasListView({
+    		var header = new HeaderView({ config: 0 }),
+    			categoriasList = new CategoriasListView({
                     el: $('#Categorias-content'),
                     el2: $('#selectCategoria')
                 }, categoriasCollection),
@@ -69,6 +71,7 @@ function configuraciones() {
                 }else{
 	                _.each(data, function(coleccion){
 	                	coleccion.tipo = 1;
+	                	coleccion.idColeccion = coleccion.id;
 	                    categoriasCollection.add(coleccion);
 	                });    
                 }
@@ -79,14 +82,20 @@ function configuraciones() {
     			coleccion: id,
     			recurso: 'coleccionCategorias'
     		};
-    		utilidades.getJSON(data).then(function(data){
+    		var self = {
+    			idColecccion: id
+    		}
+    		utilidades.getJSON(data, self).then(function(data){
             	if(data.length == 0){
                     $('#Categorias-content').append('<p>No existen categorias en esta clasificación.</p>');
                 }else{
+                	datos = data.self;
 	                _.each(data, function(coleccion){
 	                	coleccion.tipo = 2;
+	                	coleccion.idColeccion = datos.idColecccion;
+	                	coleccion.idCategoria = coleccion.id;
 	                    categoriasCollection.add(coleccion);
-	                });    
+	                }, datos);    
                 }
             });
     	},
@@ -96,14 +105,22 @@ function configuraciones() {
     			categoria: idCategoria,
     			recurso: 'coleccionesClasificacion'
     		};
-    		utilidades.getJSON(data).then(function(data){
+    		var self = {
+    			idColeccion: idColeccion,
+    			idCategoria: idCategoria
+    		}
+    		utilidades.getJSON(data, self).then(function(data){
             	if(data.length == 0){
                     $('#Categorias-content').append('<p>No existen categorias en esta clasificación.</p>');
                 }else{
+                	datos = data.self;
 	                _.each(data, function(coleccion){
 	                	coleccion.tipo = 3;
+	                	coleccion.idColeccion = datos.idColeccion;
+	                	coleccion.idCategoria = datos.idCategoria;
+	                	coleccion.idClasificacion = coleccion.id;
 	                    categoriasCollection.add(coleccion);
-	                });    
+	                }, datos);    
                 }
             });
     	},

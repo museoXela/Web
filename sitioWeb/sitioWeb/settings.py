@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '9-g%0sjoz9=3)*+ue$n32mcl7$yg-u_eg!h@89bi%a&q!-5ok9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -82,16 +82,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
+    
 STATIC_ROOT = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2] + ['static'])
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 STATIC_URL = '/static/'
-
-PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+if not DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    )
 
 
 #AWS_ACCES_KEY_ID = 'AKIAILSHYDS3LXVB5XJA'
@@ -102,11 +101,11 @@ STATICFILES_FINDERS = (
 from getenv import env
 #AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
 #STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-if not DEBUG:
-    AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
-    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-    STATIC_URL = S3_URL
+#if not DEBUG:
+#    AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
+#    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+#    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+#    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+#    STATIC_URL = S3_URL

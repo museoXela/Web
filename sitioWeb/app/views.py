@@ -35,8 +35,28 @@ def search_view(request):
         url = 'http://104.131.99.190/web/v1/exhibicion/buscar/?keyword=%s' % keyword
     if recurso == 'colecciones':
         url = 'http://104.131.99.190/web/v1/colecciones/'
+    if recurso == 'coleccionCategorias':
+        idColeccion = request.GET['coleccion']
+        url = 'http://104.131.99.190/web/v1/categorias/?coleccion=%s' % idColeccion
+    if recurso == 'coleccionesClasificacion':
+        idColeccion = request.GET['coleccion']
+        idCategoria = request.GET['categoria']
+        url = 'http://104.131.99.190/web/v1/clasificacion/?coleccion=%s&categoria=%s' % (idColeccion, idCategoria)
+    if recurso == 'piezasExhibicion':
+        url = 'http://104.131.99.190/web/v1/exhibicion'
+    if recurso == 'piezasColeccion':
+        idColeccion = request.GET['coleccion']
+        url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s' % idColeccion
+    if recurso == 'piezasCategoria':
+        idColeccion = request.GET['coleccion']
+        idCategoria = request.GET['categoria']
+        url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s&categoria=%s' % (idColeccion,idCategoria)
+    if recurso == 'piezasClasificacion':
+        idColeccion = request.GET['coleccion']
+        idCategoria = request.GET['categoria']
+        idClasificacion = request.GET['clasificacion']
+        url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s&categoria=%s&clasificacion=%s' % (idColeccion, idCategoria, idClasificacion)
 
-        
     headers = {'Authorization': 'oauth ea538fb5baced25bb5fa21e49310db0344139742'}
     r = requests.get(url, headers=headers)
 

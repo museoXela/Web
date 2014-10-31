@@ -21,15 +21,42 @@ function configuraciones() {
                     el: $('#Search-results'),
                 }, piezasCollection);
     		if(utilidades.getParameterByName('coleccion') === ""){
+    			var data = {
+    				recurso: 'piezasExhibicion'
+    			}
     			this.cargarColecciones();
+    			this.getPiezas(data);
     		}else{
     			idColeccion = utilidades.getParameterByName('coleccion');
-    			console.log(idColeccion);
-    			if(utilidades.getParameterByName('categorias') === ""){
-
+    			if(utilidades.getParameterByName('categoria') === ""){
+    				var data = {
+    					coleccion: idColeccion,
+    					recurso: 'piezasColeccion'
+    				}
+    				this.cargarCategorias(idColeccion);
+    				this.getPiezas(data);
     			}else{
-
-    			}
+    				idCategoria = utilidades.getParameterByName('categoria');
+    				if(utilidades.getParameterByName('clasificacion') === ""){
+    					var data = {
+	    					coleccion: idColeccion,
+	    					categoria: idCategoria,
+	    					recurso: 'piezasCategoria'
+	    				}
+    					this.cargarClasificacion(idColeccion, idCategoria);
+    					this.getPiezas(data);
+    				}else{
+    					idClasificacion = utilidades.getParameterByName('clasificacion');
+    					var data = {
+    						coleccion: idColeccion,
+	    					categoria: idCategoria,
+    						clasificacion: idClasificacion,
+	    					recurso: 'piezasClasificacion'
+    					};
+    					this.cargarClasificacion(idColeccion, idCategoria);
+    					this.getPiezas(data);
+    				}
+    			};
     		}
     	},
     	cargarColecciones: function(){
@@ -48,34 +75,48 @@ function configuraciones() {
             });
     	},
     	cargarCategorias: function(id){
-    		for(var i=0; i < 5; i++){
-    			data = {
-    				id: i,
-    				nombre: "Categoria " + i,
-    				tipo: 2,
-    				idColeccion: id
-    			};
-    			categoriasCollection.add(data);
-    		}
+    		var data = {
+    			coleccion: id,
+    			recurso: 'coleccionCategorias'
+    		};
+    		utilidades.getJSON(data).then(function(data){
+            	if(data.length == 0){
+                    $('#Categorias-content').append('<p>No existen categorias en esta clasificación.</p>');
+                }else{
+	                _.each(data, function(coleccion){
+	                	coleccion.tipo = 2;
+	                    categoriasCollection.add(coleccion);
+	                });    
+                }
+            });
     	},
-    	cargarClasificacion: function (id){
-    		for(var i=0; i < 5; i++){
-    			data = {
-    				id: i,
-    				nombre: "Categoria " + i,
-    				tipo: 1
-    			};
-    			categoriasCollection.add(data);
-    		}
+    	cargarClasificacion: function (idColeccion, idCategoria){
+    		var data = {
+    			coleccion: idColeccion,
+    			categoria: idCategoria,
+    			recurso: 'coleccionesClasificacion'
+    		};
+    		utilidades.getJSON(data).then(function(data){
+            	if(data.length == 0){
+                    $('#Categorias-content').append('<p>No existen categorias en esta clasificación.</p>');
+                }else{
+	                _.each(data, function(coleccion){
+	                	coleccion.tipo = 3;
+	                    categoriasCollection.add(coleccion);
+	                });    
+                }
+            });
     	},
     	getPiezas: function(dataPiezas){
-            dataPiezas.recurso = 'investigacionPiezas';
-            dataPiezas.codigoInvestigacion = 1;
             utilidades.getJSON(dataPiezas).then(function(data){
-                _.each(data, function(pieza){
-                	pieza.tipo = 'SearchPieza';
-                    piezasCollection.add(pieza);
-                });
+                if(data.length == 0){
+                	$('#Search-results').append('<h5>No existen piezas en esta clasificación.</h5>');
+                }else{
+	                _.each(data, function(pieza){
+	                	pieza.tipo = 'SearchPieza';
+	                    piezasCollection.add(pieza);
+	                });
+                };
             });
         }
     }

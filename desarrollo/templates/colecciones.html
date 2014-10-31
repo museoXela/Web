@@ -47,7 +47,7 @@
 		<a data-categoria="figurilla" href="/colecciones/?coleccion={{idColeccion}}&categoria={{id}}">{{ nombre }}</a>
 		{% endif %}
 		{% if tipo == 3 %}
-		<a data-categoria="figurilla"  href="/colecciones/?coleccion=1&categoria=1&clasificacion={{id}}">{{ nombre }} {{ tipo }}</a>
+		<a data-categoria="figurilla"  href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}&clasificacion={{id}}">{{ nombre }}</a>
 		{% endif %}
 		{% endverbatim %}
 	</script>

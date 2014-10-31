@@ -22,9 +22,9 @@ SECRET_KEY = '9-g%0sjoz9=3)*+ue$n32mcl7$yg-u_eg!h@89bi%a&q!-5ok9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'requests'
+    'requests',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,5 +82,30 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
+    
+STATIC_ROOT = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2] + ['static'])
 STATIC_URL = '/static/'
+if not DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    )
+
+
+#AWS_ACCES_KEY_ID = 'AKIAILSHYDS3LXVB5XJA'
+#AWS_SECRET_ACCESS_KEY = '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'
+#AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+from getenv import env
+#AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
+#STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+#if not DEBUG:
+#    AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
+#    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+#    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+#    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+#    STATIC_URL = S3_URL

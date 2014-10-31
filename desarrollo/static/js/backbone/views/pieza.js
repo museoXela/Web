@@ -20,6 +20,11 @@ module.exports = Backbone.View.extend({
     var pieza = this.model.toJSON();
     if(pieza.almacenado===true)
       this.$el.addClass('Pieza--saved');
+
+    if(pieza.tipo === 'SearchPieza'){
+      this.$el.removeClass('Pieza');
+      this.$el.addClass('SearchPieza');
+    }
     this.$el.html(this.template(pieza));
     return this;
   },

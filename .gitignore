@@ -81,3 +81,7 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+#Archivos estativos y entorno virtual
+bin
+sitioWeb/static

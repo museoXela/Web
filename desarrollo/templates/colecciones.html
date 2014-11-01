@@ -10,10 +10,8 @@
 	{% include "partials/header.html" %}
 	<section class="Categoria">
 		<div class="Categoria-container">
-			<ul>
-				<li><a href="#" class="u-enlaces">Colección prehispanica</a></li>
-				<li class="icon-arrow-right"><a href="#" class="u-enlaces">Cerámica</a></li>
-				<li class="icon-arrow-right"><a href="#" class="u-enlaces">Figurillas</a></li>
+			<ul id="Categoria-Header">
+				<li><a href="/colecciones/" class="u-enlaces">Colecciones</a></li>
 			</ul>
 		</div>	
 	</section>
@@ -44,13 +42,13 @@
 	<script id="categoria-template" type = "text/template">
 		{% verbatim %}
 		{% if tipo == 1 %}
-		<a data-categoria="figurilla" href="/colecciones/?coleccion={{id}}">{{ nombre }}</a>
+		<a class="u-enlaces" href="/colecciones/?coleccion={{idColeccion}}">{{ nombre }}</a>
 		{% endif %}
 		{% if tipo == 2 %}
-		<a data-categoria="figurilla" href="/colecciones/?coleccion={{idColeccion}}&categoria={{id}}">{{ nombre }}</a>
+		<a class="u-enlaces" href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}">{{ nombre }}</a>
 		{% endif %}
 		{% if tipo == 3 %}
-		<a data-categoria="figurilla"  href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}&clasificacion={{id}}">{{ nombre }}</a>
+		<a class="u-enlaces" href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}&clasificacion={{idClasificacion}}">{{ nombre }}</a>
 		{% endif %}
 		{% endverbatim %}
 	</script>

@@ -6,11 +6,13 @@ var Backbone = require('backbone'),
 	PiezasListView = require('./backbone/views/piezas'),
 	CategoriasCollection = require('./backbone/collections/categorias'),
 	CategoriasListView = require('./backbone/views/categorias'),
-	utilidades = require('./utilidades');
+	CategoriaHeader = require('./backbone/views/categoria-header'),
+    utilidades = require('./utilidades');
 	Backbone.$ = $;
 function configuraciones() {
 	var piezasCollection = new Piezas(),
-		categoriasCollection = new CategoriasCollection();
+		categoriasCollection = new CategoriasCollection(),
+        categoriasHeaderCollection = new CategoriasCollection();
 	window.state = 'colecciones';
     return {
     	cargarFuncionalidad: function (){
@@ -25,7 +27,12 @@ function configuraciones() {
     		if(utilidades.getParameterByName('coleccion') === ""){
     			var data = {
     				recurso: 'piezasExhibicion'
-    			}
+    			};
+                var categoriaHeaderOptions = {
+                    tipo: 0,
+                };
+                var categoriaHeader = new CategoriaHeader(categoriaHeaderOptions, categoriasHeaderCollection);
+
     			this.cargarColecciones();
     			this.getPiezas(data);
     		}else{
@@ -34,7 +41,12 @@ function configuraciones() {
     				var data = {
     					coleccion: idColeccion,
     					recurso: 'piezasColeccion'
-    				}
+    				};
+                    var categoriaHeaderOptions = {
+                        tipo: 1,
+                        idColeccion: idColeccion,
+                    };
+                    var categoriaHeader = new CategoriaHeader(categoriaHeaderOptions, categoriasHeaderCollection);
     				this.cargarCategorias(idColeccion);
     				this.getPiezas(data);
     			}else{
@@ -45,6 +57,12 @@ function configuraciones() {
 	    					categoria: idCategoria,
 	    					recurso: 'piezasCategoria'
 	    				}
+                        var categoriaHeaderOptions = {
+                            tipo: 2,
+                            idColeccion: idColeccion,
+                            idCategoria: idCategoria
+                        };
+                        var categoriaHeader = new CategoriaHeader(categoriaHeaderOptions, categoriasHeaderCollection);
     					this.cargarClasificacion(idColeccion, idCategoria);
     					this.getPiezas(data);
     				}else{
@@ -55,6 +73,14 @@ function configuraciones() {
     						clasificacion: idClasificacion,
 	    					recurso: 'piezasClasificacion'
     					};
+                        var categoriaHeaderOptions = {
+                            tipo: 3,
+                            idColeccion: idColeccion,
+                            idCategoria: idCategoria,
+                            idClasificacion: idClasificacion
+                        };
+                        var categoriaHeader = new CategoriaHeader(categoriaHeaderOptions, categoriasHeaderCollection);
+
     					this.cargarClasificacion(idColeccion, idCategoria);
     					this.getPiezas(data);
     				}
@@ -139,7 +165,6 @@ function configuraciones() {
     }
 }
 $(function(){
-	console.log("Start app");
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
 });

@@ -56,6 +56,15 @@ def search_view(request):
         idCategoria = request.GET['categoria']
         idClasificacion = request.GET['clasificacion']
         url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s&categoria=%s&clasificacion=%s' % (idColeccion, idCategoria, idClasificacion)
+    if recurso == 'coleccion':
+        idColeccion = request.GET['coleccion']
+        url = 'http://104.131.99.190/web/v1/colecciones/%s' % (idColeccion)
+    if recurso == 'categoria':
+        idCategoria = request.GET['categoria']
+        url = 'http://104.131.99.190/web/v1/categorias/%s' % (idCategoria)
+    if recurso == 'clasificacion':
+        idClasificacion = request.GET['clasificacion']
+        url = 'http://104.131.99.190/web/v1/clasificacion/%s' % (idClasificacion)
 
     headers = {'Authorization': 'oauth ea538fb5baced25bb5fa21e49310db0344139742'}
     r = requests.get(url, headers=headers)

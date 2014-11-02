@@ -15,27 +15,28 @@ function configuraciones() {
                 eventosList = new EventosListView({
                     el: $('#Eventos-content')
                 }, eventosCollection);
-            this.getEventos();   
+            this.getEventos();
     	},
     	getEventos: function(){
             var dataEventos = {
                 recurso:'eventos'
             };
             utilidades.getJSON(dataEventos).then(function(data){
-                _.each(data, function(evento){
-                    evento.tipo = 'EventoCard'
-                    eventosCollection.add(evento);
-                });
-            });/*
-			debugger;
-            for(var i=0; i < 3; i++){
-                eventosCollection.add({titulo: 'Evento '+i, tipo: 'EventoCard'})
-            };*/
+                if(data.length === 0){
+                    $('#Eventos-content').append('<p>No hay eventos programados para las proximas fechas</p>');
+                }
+                else{
+                    _.each(data, function(evento){
+                        evento.tipo = 'EventoCard'
+                        eventosCollection.add(evento);
+                    });    
+                }
+                
+            });
         }
     }
 };
 $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
-	console.log('Start app')
 });

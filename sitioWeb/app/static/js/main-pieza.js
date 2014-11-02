@@ -29,9 +29,15 @@ function configuraciones() {
                 recurso:'piezaInvestigaciones'
             };
             utilidades.getJSON(dataInvestigaciones).then(function(data){
-                _.each(data, function(investigacion){
-                    investigacionesCollection.add(investigacion);
-                });
+                if(data.length === 0){
+                    debugger;
+                    $('#Investigaciones-content').append('<p>No hay investigaciones relacionadas con esta pieza.</p>');
+                }
+                else{
+                    _.each(data, function(investigacion){
+                        investigacionesCollection.add(investigacion);
+                    });
+                }
             });
         },
         getPieza: function (){
@@ -48,6 +54,7 @@ function configuraciones() {
 };
 
 $(function(){
+    console.log('Start app');
     var configuracionInicial = configuraciones();
     configuracionInicial.cargarFuncionalidad();
 });
@@ -178,11 +185,12 @@ var $ = require('jquery'),
 
 module.exports = (function  () {
     return {
-        getJSON : function(data){
+        getJSON : function(data, self){
             url = '/buscar/';
             var deferred = Q.defer()
             $.get(url, data, function(jsonResponse){
                 var objectResponse = JSON.parse(jsonResponse);
+                objectResponse.self = self;
                 deferred.resolve(objectResponse);
             });
             return deferred.promise;
@@ -210,6 +218,20 @@ module.exports = (function  () {
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
                 results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        },
+        getURL : function (url, extraParameters) {
+            var extraParametersEncoded = $.param(extraParameters);
+            var seperator = url.indexOf('?') == -1 ? "?" : "&";
+
+            return(url + seperator + extraParametersEncoded);
+        },
+        footerBottom: function (){
+            var bodyHeight = $("body").height();
+            var vwptHeight = $(window).height();
+            console.log(bodyHeight + " " + vwptHeight);
+            if (vwptHeight > bodyHeight) {
+                $("#Footer").addClass('Footer-bottom');
+            };
         }
     }
 })();

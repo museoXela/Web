@@ -21,9 +21,9 @@
 		{% verbatim %}
 		<section class="Categoria">
 			<div class="Categoria-container">
-				<a href="#" class="u-enlaces">{{ coleccion }}</a><span class="icon-arrow-right"></span>
-				<a href="#" class="u-enlaces">{{ categoria }}</a><span class="icon-arrow-right"></span>
-				<a href="#" class="u-enlaces">{{ clasificacion }}</a>
+				<a href="/colecciones/?coleccion={{idColeccion}}" class="u-enlaces">{{ coleccion }}</a><span class="icon-arrow-right"></span>
+				<a href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}" class="u-enlaces">{{ categoria }}</a><span class="icon-arrow-right"></span>
+				<a href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}&clasificacion=1" class="u-enlaces">{{ clasificacion }}</a>
 			</div>	
 		</section>
 		<section class="PiezaDetail">

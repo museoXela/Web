@@ -28,9 +28,15 @@ function configuraciones() {
                 recurso:'piezaInvestigaciones'
             };
             utilidades.getJSON(dataInvestigaciones).then(function(data){
-                _.each(data, function(investigacion){
-                    investigacionesCollection.add(investigacion);
-                });
+                if(data.length === 0){
+                    debugger;
+                    $('#Investigaciones-content').append('<p>No hay investigaciones relacionadas con esta pieza.</p>');
+                }
+                else{
+                    _.each(data, function(investigacion){
+                        investigacionesCollection.add(investigacion);
+                    });
+                }
             });
         },
         getPieza: function (){
@@ -47,6 +53,7 @@ function configuraciones() {
 };
 
 $(function(){
+    console.log('Start app');
     var configuracionInicial = configuraciones();
     configuracionInicial.cargarFuncionalidad();
 });

@@ -165,7 +165,6 @@ function configuraciones() {
     }
 }
 $(function(){
-	console.log("Start app");
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
 });

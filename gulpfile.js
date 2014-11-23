@@ -20,13 +20,13 @@ function browserifyShare(){
     bundleShare(b);
   });
   
-  b.add('./desarrollo/static/js/main-pieza.js');
+  b.add('./desarrollo/static/js/main-search.js');
   bundleShare(b);
 }
 
 function bundleShare(b) {
   b.bundle()
-    .pipe(source('main-pieza.js'))
+    .pipe(source('main-search.js'))
     .pipe(gulp.dest('./sitioWeb/app/static/js'));
 }
 

@@ -21,6 +21,15 @@ module.exports = (function  () {
         setLocalStorage : function(key, data){
             localStorage.setItem(key, JSON.stringify(data));
         },
+        inLocalStorage : function(codigo){
+            var piezasGuardadas = this.getLocalStorage('piezasGuardadas'),
+                almacenado = _.every(piezasGuardadas, function (e, indiceArray){
+                    return e.codigo === codigo;
+                });
+            if ((piezasGuardadas === null) || (piezasGuardadas.length === 0))
+                almacenado = false
+            return almacenado;
+        },
         popElement : function(elemento, arreglo){
             var indice = -1;
             _.each(arreglo, function (e, indiceArray){
@@ -31,6 +40,11 @@ module.exports = (function  () {
             if(indice >= 0)
                 arreglo.splice(indice,1);
             return arreglo;
+        },
+        pushElement : function(elemento, arreglo){
+            arregloActualizado = arreglo || [];
+            arregloActualizado.push(elemento);
+            return arregloActualizado;
         },
         getParameterByName : function (name) {
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

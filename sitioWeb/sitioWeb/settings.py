@@ -99,8 +99,8 @@ if not DEBUG:
 #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 from getenv import env
-AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
-STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+#AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
+#STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 #if not DEBUG:
 #    AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
 #    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')

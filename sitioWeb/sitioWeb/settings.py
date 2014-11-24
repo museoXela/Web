@@ -93,8 +93,6 @@ if not DEBUG:
     )
 
 
-#AWS_ACCES_KEY_ID = 'AKIAILSHYDS3LXVB5XJA'
-#AWS_SECRET_ACCESS_KEY = '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'
 #AWS_STORAGE_BUCKET_NAME = 'bicefalo-webapp'
 #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 #STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'

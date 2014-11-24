@@ -6,65 +6,65 @@ import requests
 # Create your views here.
 def search_view(request):
     recurso = request.GET['recurso'] or ''
-    url = 'http://104.131.99.190/api/v1/piezas/exhibicion/'
+    url = 'http://api.museoxela.com/api/v1/piezas/exhibicion/'
     resultado = {}
     r = ''
     if recurso == 'piezaDetail':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/web/v1/exhibicion/%s' % codigoPieza
+        url = 'http://api.museoxela.com/web/v1/exhibicion/%s' % codigoPieza
         #r = requests.get(url)
     if recurso == 'investigacionDetail':
         codigoInvestigacion = request.GET['codigoInvestigacion']
-        url = 'http://104.131.99.190/web/v1/investigaciones/%s' % codigoInvestigacion
+        url = 'http://api.museoxela.com/web/v1/investigaciones/%s' % codigoInvestigacion
         #r = requests.get(url)
     if recurso == 'piezaInvestigaciones':
         codigoPieza = request.GET['codigoPieza']
-        url = 'http://104.131.99.190/web/v1/exhibicion/%s/investigaciones' % codigoPieza   
+        url = 'http://api.museoxela.com/web/v1/exhibicion/%s/investigaciones' % codigoPieza   
     if recurso == 'investigacionPiezas':
         codigoInvestigacion = request.GET['codigoInvestigacion']
-        url = 'http://104.131.99.190/web/v1/investigaciones/%s/piezas' % codigoInvestigacion
+        url = 'http://api.museoxela.com/web/v1/investigaciones/%s/piezas' % codigoInvestigacion
     if recurso == 'eventos':
-        url = 'http://104.131.99.190/web/v1/eventos'
+        url = 'http://api.museoxela.com/web/v1/eventos'
     if recurso == 'voluntarios':
-        url = 'http://104.131.99.190/web/v1/voluntarios'
+        url = 'http://api.museoxela.com/web/v1/voluntarios'
     if recurso == 'search-investigaciones':
         keyword = request.GET['keyword']
-        url = 'http://104.131.99.190/web/v1/investigaciones/buscar/?keyword=%s' %  keyword
+        url = 'http://api.museoxela.com/web/v1/investigaciones/buscar/?keyword=%s' %  keyword
     if recurso == 'search-piezas':
         keyword = request.GET['keyword']
-        url = 'http://104.131.99.190/web/v1/exhibicion/buscar/?keyword=%s' % keyword
+        url = 'http://api.museoxela.com/web/v1/exhibicion/buscar/?keyword=%s' % keyword
     if recurso == 'colecciones':
-        url = 'http://104.131.99.190/web/v1/colecciones/'
+        url = 'http://api.museoxela.com/web/v1/colecciones/'
     if recurso == 'coleccionCategorias':
         idColeccion = request.GET['coleccion']
-        url = 'http://104.131.99.190/web/v1/categorias/?coleccion=%s' % idColeccion
+        url = 'http://api.museoxela.com/web/v1/categorias/?coleccion=%s' % idColeccion
     if recurso == 'coleccionesClasificacion':
         idColeccion = request.GET['coleccion']
         idCategoria = request.GET['categoria']
-        url = 'http://104.131.99.190/web/v1/clasificacion/?coleccion=%s&categoria=%s' % (idColeccion, idCategoria)
+        url = 'http://api.museoxela.com/web/v1/clasificacion/?coleccion=%s&categoria=%s' % (idColeccion, idCategoria)
     if recurso == 'piezasExhibicion':
-        url = 'http://104.131.99.190/web/v1/exhibicion'
+        url = 'http://api.museoxela.com/web/v1/exhibicion'
     if recurso == 'piezasColeccion':
         idColeccion = request.GET['coleccion']
-        url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s' % idColeccion
+        url = 'http://api.museoxela.com/web/v1/exhibicion/?coleccion=%s' % idColeccion
     if recurso == 'piezasCategoria':
         idColeccion = request.GET['coleccion']
         idCategoria = request.GET['categoria']
-        url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s&categoria=%s' % (idColeccion,idCategoria)
+        url = 'http://api.museoxela.com/web/v1/exhibicion/?coleccion=%s&categoria=%s' % (idColeccion,idCategoria)
     if recurso == 'piezasClasificacion':
         idColeccion = request.GET['coleccion']
         idCategoria = request.GET['categoria']
         idClasificacion = request.GET['clasificacion']
-        url = 'http://104.131.99.190/web/v1/exhibicion/?coleccion=%s&categoria=%s&clasificacion=%s' % (idColeccion, idCategoria, idClasificacion)
+        url = 'http://api.museoxela.com/web/v1/exhibicion/?coleccion=%s&categoria=%s&clasificacion=%s' % (idColeccion, idCategoria, idClasificacion)
     if recurso == 'coleccion':
         idColeccion = request.GET['coleccion']
-        url = 'http://104.131.99.190/web/v1/colecciones/%s' % (idColeccion)
+        url = 'http://api.museoxela.com/web/v1/colecciones/%s' % (idColeccion)
     if recurso == 'categoria':
         idCategoria = request.GET['categoria']
-        url = 'http://104.131.99.190/web/v1/categorias/%s' % (idCategoria)
+        url = 'http://api.museoxela.com/web/v1/categorias/%s' % (idCategoria)
     if recurso == 'clasificacion':
         idClasificacion = request.GET['clasificacion']
-        url = 'http://104.131.99.190/web/v1/clasificacion/%s' % (idClasificacion)
+        url = 'http://api.museoxela.com/web/v1/clasificacion/%s' % (idClasificacion)
 
     headers = {'Authorization': 'oauth ea538fb5baced25bb5fa21e49310db0344139742'}
     r = requests.get(url, headers=headers)

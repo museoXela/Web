@@ -26,8 +26,12 @@ function configuraciones() {
             this.getEventos();
     	},
     	cargarPiezas: function(){
-    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
+    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas') || [];
+            if(piezasGuardadas.length === 0){
+                $('#Piezas-content').append('<p>No existen piezas almacenadas en este equipo</p>');
+            };
     		_.each(piezasGuardadas, function(pieza){
+                pieza.tipo = "Pieza";
     			piezas.add(pieza);
     		});
     	},
@@ -44,10 +48,7 @@ function configuraciones() {
                     });    
                 }
                 
-            });/*
-            for(var i=0; i < 3; i++){
-                eventosCollection.add({titulo: 'Evento '+i})
-            };*/
+            });
         }
     }
 };

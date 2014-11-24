@@ -27,8 +27,12 @@ function configuraciones() {
             this.getEventos();
     	},
     	cargarPiezas: function(){
-    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
+    		var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas') || [];
+            if(piezasGuardadas.length === 0){
+                $('#Piezas-content').append('<p>No existen piezas almacenadas en este equipo</p>');
+            };
     		_.each(piezasGuardadas, function(pieza){
+                pieza.tipo = "Pieza";
     			piezas.add(pieza);
     		});
     	},
@@ -45,10 +49,7 @@ function configuraciones() {
                     });    
                 }
                 
-            });/*
-            for(var i=0; i < 3; i++){
-                eventosCollection.add({titulo: 'Evento '+i})
-            };*/
+            });
         }
     }
 };
@@ -191,9 +192,16 @@ module.exports = Backbone.View.extend({
 
   render: function () {
     var pieza = this.model.toJSON();
+    pieza.almacenado = utilidades.inLocalStorage(pieza.codigo);
     if(pieza.almacenado===true)
       this.$el.addClass('Pieza--saved');
+
+    if(pieza.tipo === 'SearchPieza'){
+      this.$el.removeClass('Pieza');
+      this.$el.addClass('SearchPieza');
+    }
     this.$el.html(this.template(pieza));
+    this.model.set(pieza);
     return this;
   },
   toggleSave: function(event) {
@@ -201,6 +209,7 @@ module.exports = Backbone.View.extend({
     var piezasGuardadas = utilidades.getLocalStorage('piezasGuardadas');
     var piezasActualizadas = [];
     if(pieza.almacenado===true){
+      this.$el.removeClass('Pieza--saved');
       piezasActualizadas = utilidades.popElement(pieza, piezasGuardadas);
       utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas)
       if(window.state === 'index'){
@@ -210,6 +219,9 @@ module.exports = Backbone.View.extend({
       pieza.almacenado = false;
     }else{
       pieza.almacenado = true;
+      this.$el.addClass('Pieza--saved');
+      piezasActualizadas = utilidades.pushElement(pieza, piezasGuardadas);
+      utilidades.setLocalStorage('piezasGuardadas', piezasActualizadas);
     };
     this.model.set(pieza);
   }
@@ -249,11 +261,12 @@ var $ = require('jquery'),
 
 module.exports = (function  () {
     return {
-        getJSON : function(data){
+        getJSON : function(data, self){
             url = '/buscar/';
             var deferred = Q.defer()
             $.get(url, data, function(jsonResponse){
                 var objectResponse = JSON.parse(jsonResponse);
+                objectResponse.self = self;
                 deferred.resolve(objectResponse);
             });
             return deferred.promise;
@@ -265,6 +278,15 @@ module.exports = (function  () {
         setLocalStorage : function(key, data){
             localStorage.setItem(key, JSON.stringify(data));
         },
+        inLocalStorage : function(codigo){
+            var piezasGuardadas = this.getLocalStorage('piezasGuardadas'),
+                almacenado = _.every(piezasGuardadas, function (e, indiceArray){
+                    return e.codigo === codigo;
+                });
+            if ((piezasGuardadas === null) || (piezasGuardadas.length === 0))
+                almacenado = false
+            return almacenado;
+        },
         popElement : function(elemento, arreglo){
             var indice = -1;
             _.each(arreglo, function (e, indiceArray){
@@ -275,6 +297,31 @@ module.exports = (function  () {
             if(indice >= 0)
                 arreglo.splice(indice,1);
             return arreglo;
+        },
+        pushElement : function(elemento, arreglo){
+            arregloActualizado = arreglo || [];
+            arregloActualizado.push(elemento);
+            return arregloActualizado;
+        },
+        getParameterByName : function (name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        },
+        getURL : function (url, extraParameters) {
+            var extraParametersEncoded = $.param(extraParameters);
+            var seperator = url.indexOf('?') == -1 ? "?" : "&";
+
+            return(url + seperator + extraParametersEncoded);
+        },
+        footerBottom: function (){
+            var bodyHeight = $("body").height();
+            var vwptHeight = $(window).height();
+            console.log(bodyHeight + " " + vwptHeight);
+            if (vwptHeight > bodyHeight) {
+                $("#Footer").addClass('Footer-bottom');
+            };
         }
     }
 })();

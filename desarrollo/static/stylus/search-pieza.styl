@@ -70,6 +70,16 @@
     .Pieza-content, .Pieza-logo
         vertical-align: top
 
+.Pieza--saved
+    .Pieza-content
+        .Pieza-actions
+            .Pieza-actions-iconHeart
+                &:before
+                    content: "\e600"
+                &:hover
+                    &:before
+                        content: "\e601"
+
 @media screen and (min-width:320px)
     .SearchPieza
         .Pieza-content

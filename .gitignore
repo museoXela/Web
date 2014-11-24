@@ -88,3 +88,5 @@ node_modules
 #Archivos estativos y entorno virtual
 bin
 sitioWeb/static
+include
+local

@@ -6,4 +6,4 @@ Inicialmente en la web se puede:
   2. Ver y buscar las investigaciones realizadas en el museo.
   3. Ver los próximos eventos del museo
 
-Visita la [página del museo de quetzaltenango](www.museoxela.com) para darte una idea. 
+Visita la [página del museo de quetzaltenango](http://www.museoxela.com) para darte una idea. 

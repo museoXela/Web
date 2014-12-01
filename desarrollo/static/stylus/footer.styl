@@ -1,0 +1,91 @@
+.Footer
+    background-color: color-black
+    color: color-white
+    padding: 20px 10px
+    text-transform: uppercase
+    p
+        margin: 0
+    ul
+        list-style: none
+        margin: 10px 0px 0px 0px
+        padding: 0
+        li
+            margin-top: 5px
+            a
+                color: color-white
+                font-size: 1rem
+                text-decoration: none
+                &:hover
+                    text-decoration: underline
+
+    .Footer-options    
+        .Footer-contact
+            margin-top: 20px
+            ul
+                text-transform: none
+
+        .Footer-nav
+            font-weight: bold
+            margin-right: 40px
+
+    .Footer-proyecto
+        margin-top: 20px
+        p
+            margin-top: 10px
+
+        .Footer-proyecto-logo
+            a
+                color: color-white
+                img
+                    margin-right: 10px
+                img, h4
+                    display: inline-block
+                    vertical-align: middle
+.Footer-bottom
+    bottom: 0
+    left: 0
+    position: absolute
+    right: 0
+
+@media screen and (min-width:320px)
+    .Footer
+        .Footer-proyecto
+            text-align: center
+            text-transform: none
+
+            .Footer-proyecto-logo
+                a
+                    h4
+                        font-size: 20px
+
+@media screen and (min-width:768px)
+    .Footer
+        overflow: hidden
+
+        .Footer-options
+            float: right
+            margin-left: 40px
+
+        .Footer-proyecto
+            width: 400px
+            float: left
+            text-align: left
+            margin-top: 0px
+
+@media screen and (min-width:1021px)
+    .Footer
+        .Footer-container
+            margin: 0px auto
+            width: 1000px
+
+        .Footer-options
+            .Footer-contact
+                margin-top: 0px
+
+            .Footer-contact, .Footer-nav
+                display: inline-block
+        
+
+        
+
+

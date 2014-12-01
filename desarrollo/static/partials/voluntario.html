@@ -1,0 +1,17 @@
+{% verbatim %}
+<section class="Voluntario-datos">
+	<figure>
+		<img src='{{ fotografia }}' alt="Museo Víctor Salvador de León Toledo">
+	</figure>
+	<h5>{{ nombre }}, {{ apellido }}</h5>
+	<p>{{ biografia }}</p>
+</section>
+<section class="Voluntario-investigaciones">
+	<p>Investigaciones</p>
+	<ul>
+		{% for investigacion in investigaciones %}
+		<li><a href="/investigaciones/{{ investigacion.id }}" class="u-enlaces">{{ investigacion.titulo }}</a></li>
+		{% endfor %}
+	</ul>
+</section>
+{% endverbatim %}

@@ -1,0 +1,19 @@
+{% verbatim %}
+<section class="Pieza-logo">
+	<a href="/piezas/{{ codigo }}">
+		<img src='{{ fotografia }}' alt="Pieza"/>
+	</a>	
+</section>
+<section class="Pieza-content">
+	<a class="u-enlaces" href="/piezas/{{ codigo }}">{{ nombre }}</a>
+	<section class="Pieza-content-info">
+		<p><span class="icon-earth">&nbsp;{{ procedencia }}</span>
+		<span class="icon-dating">&nbsp;{{ fechamiento }}</span></p>
+	</section>
+	<p>{{ resumen }}</p>
+	<section class="Pieza-actions">
+		<a href="/colecciones/?coleccion={{idColeccion}}&categoria={{idCategoria}}">{{ categoria }}</a>
+		<span class="Pieza-actions-iconHeart"></span>
+	</section>
+</section>
+{% endverbatim %}

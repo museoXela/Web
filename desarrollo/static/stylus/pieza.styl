@@ -1,0 +1,68 @@
+.Pieza
+    background-color: white
+    border-radius: 5px
+    display: inline-block
+    text-align: left
+    width: 190px
+
+    .Pieza-content
+        padding: 10px
+        > a
+            font-size: 1.125rem
+
+        p
+            color: color-black-b
+            margin: 10px 0px
+
+        .Pieza-actions
+            border-top: 1px solid color-gray-b
+            font-size: 0.875rem
+            overflow: hidden
+            a
+                background-color: color-dark-pynk
+                border-radius: 5px
+                color: color-white
+                display: inline-block
+                float: left
+                font-weight: bold
+                margin: 10px 0px
+                padding: 5px 10px
+                text-decoration: none
+                &:hover
+                    text-decoration: underline
+            .Pieza-actions-iconHeart
+                color: color-strong-red
+                float: right
+                font-family: 'icomoon'
+                font-size: 1.5rem
+                margin: 12px 0px
+                vertical-align: middle
+                &:before
+                    content: "\e601"
+                &:hover
+                    cursor: pointer
+                    &:before
+                        content: "\e600"
+
+        .Pieza-content-info
+            display: none
+
+            
+
+    .Pieza-logo
+        font-size: 0px
+        img
+            height: 140px
+            width: 190px
+            border-radius: 5px 5px 0px 0px
+
+
+.Pieza--saved
+    .Pieza-content
+        .Pieza-actions
+            .Pieza-actions-iconHeart
+                &:before
+                    content: "\e600"
+                &:hover
+                    &:before
+                        content: "\e601"

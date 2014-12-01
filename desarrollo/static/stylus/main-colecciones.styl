@@ -1,0 +1,105 @@
+@import "normalize.styl"
+@import "nib"
+@import "colores.styl"
+@import "fuentes.styl"
+@import "iconos.styl"
+@import "utilidades.styl"
+@import "header.styl"
+@import "footer.styl"
+@import "evento-card.styl"
+@import "search-pieza.styl"
+body
+    background-color: color-gray-b
+    color: color-black-b
+    font-family: 'source_sans_pro' !important
+    font-size: 16px
+.Categoria
+    background-color: color-white
+    color: color-strong-blue
+    ul
+        list-style: none
+        margin: 0
+        padding: 0
+        li
+            display: inline-block
+            vertical-align: top
+            font-family: 'icomoon'
+            &:before 
+                content: "\e609"
+            &:first-child
+                &:before
+                    content: ""
+.Search
+    .Search-options
+        background-color: color-white
+        border-radius: 5px
+        display: block
+        margin-bottom: 20px
+        padding: 20px 10px
+        > p
+            margin: 0px 0px 10px 0px
+        .Search-categoria
+            text-align: center
+            ul
+                list-style: none
+                margin: 0
+                padding: 0
+                li
+                    margin-bottom: 10px
+                    a
+                        background-color: color-dark-pynk
+                        border-radius: 5px
+                        color: color-white
+                        display: block
+                        font-weight: bold
+                        padding: 10px 20px
+                        text-decoration: none
+                        &:hover
+                            background-color: color-dark-pynk-l
+                            text-decoration: underline
+        .Search-selection
+            > div
+                display: block
+                select
+                    display: block
+                    width: 100%
+    .Search-results
+        .SearchPieza
+            margin-bottom: 10px
+
+
+.Categoria-container
+    padding: 10px
+.Search-container
+    padding: 20px 10px
+
+@media screen and (min-width:320px)
+    .Search
+        .Search-options
+            .Search-categoria
+                display: none
+
+@media screen and (min-width:768px)
+    .Search
+        .Search-options
+            width: 25%
+            .Search-categoria
+                display: block
+            .Search-selection
+                display: none
+        .Search-results
+            width: 69%
+            padding-left: 20px
+        .Search-options, .Search-results
+            display: inline-block
+            vertical-align: top
+            
+@media screen and (min-width:1020px)
+    .Search
+        .Search-options
+            width: 20%
+        .Search-results
+            width: 74%
+    .Categoria-container, .Search-container
+        margin: 0px auto
+        width: 1000px

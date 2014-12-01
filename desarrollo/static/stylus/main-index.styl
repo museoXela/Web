@@ -1,0 +1,188 @@
+@import "normalize.styl"
+@import "nib"
+@import "colores.styl"
+@import "fuentes.styl"
+@import "iconos.styl"
+@import "utilidades.styl"
+@import "header.styl"
+@import "footer.styl"
+@import "pieza.styl"
+@import "evento.styl"
+body
+    background-color: color-gray-b
+    font-family: 'source_sans_pro' !important
+    color: color-black
+    font-size: 16px
+
+.Eventos
+    background-color: color-dark-cyan
+    color: white
+    .Eventos-container
+        padding: 20px 10px
+        > a
+            background-color: color-strong-red
+            border-radius: 5px
+            color: color-white
+            display: block
+            font-size: 1.5rem
+            font-weight: bold
+            margin: -40px auto 20px auto
+            padding: 4px 10px
+            text-align: center
+            text-decoration: none
+            width: 40% 
+            &:hover
+                text-decoration: underline
+    .Eventos-content
+        text-align: center
+
+.Piezas
+    .Piezas-container
+        padding: 20px 10px
+            
+    .Piezas-content
+        text-align: center
+
+.Pieza
+    margin: 10px
+        
+
+
+.Presentacion
+    background-color: color-lime-green
+    color: color-white
+    .Presentacion-container
+        padding: 20px 10px 40px 10px
+    .Presentacion-content
+        h1
+            font-weight: normal
+        h3
+            font-weight: 300
+            margin: 10px 0px
+        form
+            position: relative
+            font-size: 16px
+            margin-top: 10px
+            input
+                @extend .u-input
+                display: block
+                width: 100%
+                padding: 8.5px 20px 8.5px 10px
+
+            input:focus + span
+                color: color-black
+            span
+                bottom: 10px
+                color: color-gray-b
+                position: absolute
+                right: 10px
+    .Presentacion-logo
+        margin: 0px 20px
+        img
+                width: 100%
+
+.Propuestas
+    background-color: color-white
+    text-align: center
+    h4
+        font-weight: normal
+        margin-bottom: 20px
+    .Propuestas-container
+        padding: 20px 10px
+
+.Propuesta
+    margin-bottom: 20px
+    h5
+        font-weight: normal
+        margin-bottom: 10px
+    p
+        color: color-black-b
+        margin: 0
+    &:last-child
+        margin-bottom: 0px
+        
+
+@media screen and (min-width:320px)
+    .Eventos
+        .Eventos-content
+            .Evento
+                padding-bottom: 10px
+                &:last-child
+                    padding-bottom: 0px
+
+    .Piezas
+        display: none
+
+    .Presentacion
+        .Presentacion-content
+            h1
+                font-size: 2.25em
+            h3
+                font-size: 1.5em
+        .Presentacion-logo
+            display: none
+
+@media screen and (min-width:510px)
+    .Eventos
+        .Eventos-container
+            > a
+                width: 200px
+        .Eventos-content
+            .Evento
+                padding-bottom: 0px
+                width: 40%
+
+    .Piezas
+        display: block
+
+    .Presentacion
+        .Presentacion-logo
+            width: 40%
+        .Presentacion-content
+            width: 50%
+        .Presentacion-content, .Presentacion-logo
+            display: inline-block
+            vertical-align: top
+
+    .Propuesta
+        margin: 0px 10px
+        display: inline-block
+        vertical-align: top
+        width: 30%
+        figure
+            margin: 0
+        
+@media screen and (min-width:768px)
+    .Eventos
+        .Eventos-content
+            .Evento
+                width: 30%
+    .Presentacion
+        .Presentacion-logo
+            width: 30%
+        .Presentacion-content
+            width: 60%
+
+@media screen and (min-width:1021px)
+    .Eventos
+        overflow: hidden
+        .Eventos-container
+            padding: 0px
+            > a
+                border-radius: 0px
+                display: block
+                margin: 0
+                max-height: 100px
+                padding: 21px 0px
+                width: 100px
+
+        .Eventos-content
+            padding: 10px
+            width: 88%
+    .Eventos-container > a, .Eventos-content
+        display: inline-block !important
+        vertical-align: top
+
+    .Eventos-container, .Piezas-container, .Presentacion-container, .Propuestas-container
+        margin: 0px auto
+        width: 1000px

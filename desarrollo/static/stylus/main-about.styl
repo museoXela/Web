@@ -1,0 +1,145 @@
+@import "normalize.styl"
+@import "nib"
+@import "colores.styl"
+@import "fuentes.styl"
+@import "iconos.styl"
+@import "utilidades.styl"
+@import "header.styl"
+@import "footer.styl"
+@import "voluntario.styl"
+
+body
+    background-color: color-gray-b
+    color: color-black-b
+    font-family: 'source_sans_pro' !important
+    font-size: 16px
+
+.Contacto
+    background-color: color-lime-green
+    color: color-white
+    
+    .Contacto-formulario
+        background-color: color-white
+        border-radius: 5px
+        color: color-black-b
+        overflow: hidden
+        padding: 20px 10px
+        form
+            input[type="submit"]
+                display: inline-block
+                margin-bottom: 0px
+                float: right
+                width: auto
+            input, textarea
+                margin-bottom: 10px
+            input, label, textarea
+                display: block
+                width: 100%
+
+    .Contacto-mensaje
+        margin-bottom: 20px
+        p
+            margin: 0
+            font-size: 1.5rem
+
+.Informacion
+    background-color: color-white
+    h3
+        color: color-strong-blue
+        font-weight: normal
+        margin-bottom: 20px
+    figure
+        display: block
+        margin: 0 auto 20px auto
+        width: 75%
+        img
+            width: 100%
+    .Informacion-container
+        overflow: hidden
+    .Informacion-content
+        > p
+            margin: 0px 0px 10px 0px
+        .Informacion-content-datos
+            p
+                margin: 0px
+
+.Voluntarios
+    background-color: color-gray-b
+    .Voluntarios-content
+        > p
+            font-size: 24px !important
+        .Voluntario
+            display: block
+            margin-bottom: 20px
+            &:last-child
+                margin-bottom: 0px
+
+.Contacto-container, .Informacion-container, .Voluntarios-container
+    padding: 20px 10px
+
+
+@media screen and (min-width:510px)
+    .Informacion
+        overflow: hidden
+        figure
+            float: left
+            width: 35%
+            img
+                width: 100%
+        h3
+            margin: 10px 0px
+        h3, .Informacion-content
+            float: right      
+            width: 60%
+        figure, h3, .Informacion-content
+            display: inline-block
+            vertical-align: top
+    
+    .Voluntarios
+        .Voluntarios-content
+            font-size: 0px
+            text-align: center
+            .Voluntario
+                display: inline-block
+                font-size: 1rem
+                vertical-align: top
+                width: 44%
+                &:nth-child(2n)
+                    margin-left: 10px
+
+@media screen and (min-width:768px)
+    .Contacto
+        .Contacto-formulario
+            width: 55%
+        .Contacto-mensaje
+            padding-right: 20px
+            width: 35%
+        .Contacto-formulario, .Contacto-mensaje
+            display: inline-block
+            vertical-align: top
+
+    .Voluntarios
+        .Voluntarios-content
+            .Voluntario
+                width: 28%
+                &:nth-child(2n)
+                    margin: 0px 10px
+
+@media screen and (min-width:1021px)
+    .Contacto
+        .Contacto-formulario
+            width: 50%
+        .Contacto-mensaje
+            width: 45%
+
+    .Voluntarios
+        .Voluntarios-content
+            .Voluntario
+                width: 22%
+                margin: 10px 0px 0px 10px
+                &:nth-child(2n)
+                    margin: 10px 0px 0px 10px
+
+    .Contacto-container, .Informacion-container, .Voluntarios-container
+        margin: 0px auto
+        width: 1000px

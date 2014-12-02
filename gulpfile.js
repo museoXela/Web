@@ -6,10 +6,12 @@ var gulp = require('gulp'),
     source = require("vinyl-source-stream"),
     watchify = require('watchify'),
     stylus = require('gulp-stylus'),
-    nib = require('nib');
+    nib = require('nib'),
+    util = require('gulp-util');
 
 function browserifyShare(){
   // you need to pass these three config option to browserify
+  var filename = (util.env.filename ? util.env.filename : 'index');
   var b = browserify({
     cache: {},
     packageCache: {},
@@ -20,13 +22,14 @@ function browserifyShare(){
     bundleShare(b);
   });
   
-  b.add('./desarrollo/static/js/main-search.js');
+  b.add('./desarrollo/static/js/main-'+ filename +'.js');
   bundleShare(b);
 }
 
 function bundleShare(b) {
+  var filename = (util.env.filename ? util.env.filename : 'index');
   b.bundle()
-    .pipe(source('main-search.js'))
+    .pipe(source('main-'+ filename +'.js'))
     .pipe(gulp.dest('./sitioWeb/app/static/js'));
 }
 
@@ -49,7 +52,8 @@ gulp.task('partials', function (){
 });
 
 gulp.task('stylus', function () {
-  var cssSrc = './desarrollo/static/stylus/main-busqueda.styl',
+  var filename = (util.env.filename ? util.env.filename : 'index');
+  var cssSrc = './desarrollo/static/stylus/main-'+ filename +'.styl',
       cssDst = './sitioWeb/app/static/css';
 
   gulp.src(cssSrc)

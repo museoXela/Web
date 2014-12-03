@@ -21,5 +21,5 @@ function configuraciones() {
 $(function(){
 	var configuracionInicial = configuraciones();
 	configuracionInicial.cargarFuncionalidad();
-	console.log("Start App!");
+	console.log("Inicio cualquier cosa!");
 });

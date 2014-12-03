@@ -37,24 +37,50 @@
     &:active
         background-color: color-pure-blue-b
 
-.u-checkbox
-    border-radius: 5px
-    input[type=checkbox]:checked + label
-        font-family: 'icomoon'
-        &:before
-            content: "\e60b"
+.u-checkbox, .u-radio
+    position: relative
     label
-        &:hover
-            cursor: pointer
+        cursor: pointer
+        display: block
+        margin-bottom: 10px
+        overflow: hidden
+        position: relative
+        &:before
+            background-color: color-white
+            border: 1.5px solid color-gray-b
+            content: ""
+            display: inline-block
+            height: 24px
+            line-height: 26px
+            margin-right: 10px
+            vertical-align: middle
+            width: 24px
+                 
+    input[type=radio], input[type=checkbox]
+        display: none
+        
+    input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:before
+        font-family: 'icomoon'
+        border: 1.5px solid color-black-b
+        color: color-pure-blue
+        font-size: 24px
+        text-align: center
+
+.u-checkbox
+    label
+        &:before
+            border-radius: 20%
+    input[type=checkbox]:checked + label:before
+        content: "\e60b" 
+
 .u-radio
-    border-radius: 50%
-    input[type=radio]:checked + label
-        background-color: color-strong-blue
-        border-radius: 50%
-        bottom: 20%
-        left: 20%
-        right: 20%
-        top: 20%
+    label
+        &:before
+            border-radius: 50%
+    input[type=radio]:checked + label:before
+        content: "\e60d" 
+    
+    
 .u-select
     display: inline-block
     font-family: icomoon
@@ -84,29 +110,6 @@
             border-color: color-pure-blue
             background-image: url(../img/arrow-down-select.png)
             box-shadow: 0px 0px 5px color-pure-blue
-.u-radio, .u-checkbox
-    background-color: color-white
-    border: 1px solid color-gray-b
-    display: inline-block
-    height: 24px
-    position: relative
-    width: 24px
-    label
-        bottom: 0
-        color: color-strong-blue
-        display: block
-        font-size: 1.25rem
-        left: 0
-        padding: 2px 0px
-        position: absolute
-        right: 0
-        text-align: center
-        top: 0
-        user-select: none
-        &:hover
-            cursor: pointer
-    input[type=checkbox], input[type=radio]
-        visibility: hidden
 
 .u-enlaces
     color: color-strong-blue

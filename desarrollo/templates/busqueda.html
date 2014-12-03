@@ -20,32 +20,24 @@
 		<section class="Search">
 			<div class="Search-container">
 				<section id="SearchOptions"class="SearchOptions">
-					<section class="SearchOptions-check">
-						<p>¿Qué deseas buscar?</p>
-						<div class="SearchOptions-check-pieza">
-							<div class="u-checkbox">
-								<input type="checkbox" id="checkPieza" value="" checked>
-								<label for="checkPieza"></label>
-							</div>
-							<label for="checkPieza">Piezas</label>
-						</div>
-						<div class="SearchOptions-check-investigacion">
-							<div class="u-checkbox">
-								<input type="checkbox" id="checkInvestigacion" value="" checked>
-								<label for="checkInvestigacion"></label>
-							</div>
-							<label for="checkInvestigacion">Investigaciones</label>
-						</div>
+					<section class="SearchOptions-type">
+						<p><strong>¿Qué deseas buscar?</strong></p>
+						<div class="u-radio">  
+						    <input id="piezas" type="radio" name="search-type" value="piezas" checked="checked"/>  
+						    <label for="piezas">Piezas</label>  
+						    <input id="investigaciones" type="radio" name="search-type" value="investigaciones"/>  
+						    <label for="investigaciones">Investigaciones</label>
+						    <input id="autores" type="radio" name="search-type" value="autores"/>  
+						    <label for="autores">autores</label>  
+						</div>  
 					</section>
-					<section class="SearchOptions-selection">
-						<p>Filtra por categoria:</p>
-						<div class="u-select">
-							<select id="selectCategoria">
-						      	<option>Todas</option>
-						      	<option>Cerámica</option>
-						      	<option>Fototeca</option>
-						      	<option>Botanica</option>
-						    </select>
+					<section class="SearchOptions-extras">
+						<p>Opciones de busqueda:</p>
+						<div class="u-checkbox">
+							<input id="check1" type="checkbox" name="check" value="check1" checked="checked">
+							<label for="check1">Checkbox No. 1</label>
+							<input id="check2" type="checkbox" name="check" value="check2" checked="checked">
+							<label for="check2">Checkbox No. 2</label>
 						</div>
 					</section>
 				</section>

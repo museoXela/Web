@@ -46,20 +46,19 @@ body
             width: 100%
     .SearchOptions
         background-color: color-white
-        padding: 20px 10px
+        padding: 10px 10px
         border-radius: 5px
         margin-bottom: 20px
         p
             margin: 0px 0px 10px 0px
-        .SearchOptions-check
-            padding-bottom: 10px
+        > section
+            padding: 10px 0px
             border-bottom: 1px solid color-gray-b
-            .SearchOptions-check-pieza
-                margin-bottom: 10px
-            > div
-                > label
-                    margin-left: 5px
-                    vertical-align: middle
+            
+            &:last-child
+                border-bottom: 0px
+            
+            
         .SearchOptions-selection
             padding: 10px 0px 0px 0px
             display: none !important
